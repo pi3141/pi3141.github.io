@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Calcul nutriscore</title>
+    <style>
+        textarea {
+            width: 200px;
+            height: 100px;
+        }
+
+        fieldset {
+            border: none;
+            display: flex;
+            flex-direction: column;
+        }
+
+        fieldset div {
+            padding: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <label>Masse après cuisson (g) <input type="text" id='masse_pf'></input></label>
+    <br>
+    <fieldset id="ingredients">
+    </fieldset>
+    <select id="ingredients_select"></select>
+    <input id='addIngredient' type="button" value="+">
+    <br>
+    <input type="button" id='calculer' value="calculer">
+    <div id="nutriscore"></div>
+    <textarea id="result" onclick="this.focus();this.select()" readonly="readonly"></textarea>
+    <script>
+
+        //glob var :(
+        var svg = {
+            A: "<svg xmlns='http://www.w3.org/2000/svg' width='240' height='130' viewBox='0 0 744 1052'><path fill = '#fff' fill-rule='evenodd' d = 'M-419 0h1582c100 0 180 80 180 180v633c0 99-80 180-180 180H-419c-100 0-180-81-180-180V180C-599 80-519 0-419 0Z' /><path fill='#e63e11' fill-rule='evenodd' d='M749 358h363v586H749z'/><path fill='#038141' fill-rule='evenodd' d='M-309 358H55v586h-364z'/><path fill='#038141' fill-rule='evenodd' d='M-382 358h90c76 0 136 61 136 136v314c0 75-60 136-136 136h-90c-76 0-137-61-137-136V494c0-75 61-136 137-136z'/><path fill='#fff' fill-opacity='.4' d='M-385 514h56l97 266h-63l-21-60h-83l-20 60h-63l97-266zm59 164-31-94-32 94h63z' font-family='Raleway' font-weight='800' letter-spacing='0' style='line-height:89.99999762%;-inkscape-font-specification:&quot;Raleway Ultra-Bold&quot;' word-spacing='0'/><path fill='#e63e11' fill-rule='evenodd' d='M1070 358h90c76 0 136 61 136 136v314c0 75-60 136-136 136h-90c-76 0-137-61-137-136V494c0-75 61-136 137-136z'/><path fill='#fff' fill-opacity='.4' d='M1189 726v54h-187V514h183v54h-122v52h105v49h-105v57h126z' font-family='Raleway' font-weight='800' letter-spacing='0' style='line-height:89.99999762%;-inkscape-font-specification:&quot;Raleway Ultra-Bold&quot;' word-spacing='0'/><path fill='#7d7d7d' d='M-443 163v77h-31V106h24l62 79v-79h31v134h-25l-61-77zM-273 213q8 0 13-3 6-3 9-9 4-5 5-12 2-7 2-15v-68h31v68q0 14-4 26-3 13-11 22-7 9-18 14t-27 5q-16 0-27-5-12-6-19-15t-10-21q-4-12-4-26v-68h31v68q0 8 2 15l5 13q3 5 9 8 5 3 13 3zM-87 133h-41v107h-31V133h-41v-27h113v27zM-72 240V106h61q9 0 17 4t14 10q6 6 9 15 4 8 4 16l-2 12-4 11-7 9-9 7 29 50H5l-26-43h-20v43h-31zm31-70h28q6 0 10-6 4-5 4-13t-5-13q-4-5-9-5h-28v37zM55 240V106h31v134H55zM109 202v-28h58v28h-58zM271 145l-4-3-8-4-12-4-12-2q-16 0-16 11l1 6 6 4 9 3 12 4q9 2 17 6 8 3 13 7 6 5 9 12 3 6 3 15 0 12-5 20-4 7-11 12t-16 7q-9 2-19 2l-15-1-15-3-14-5-13-7 14-27 5 3 10 6 14 4q7 2 15 2 16 0 16-10l-2-6-7-4-10-4-13-4-16-6q-7-3-12-8-4-4-6-10-2-5-2-13 0-10 4-19 4-8 10-13 7-6 16-9t19-3l14 2 13 3 12 5 10 5-14 26zM299 172q0-12 5-24 4-12 13-22 9-9 21-15 13-6 28-6 19 0 33 8t21 21l-24 17q-2-5-6-9l-7-6-9-3-8-1q-9 0-16 4l-11 9q-4 6-6 13t-2 15q0 8 2 15 3 8 7 13 5 6 11 9 7 3 15 3h9l8-4 8-5 5-9 26 15q-3 7-10 13-5 6-13 10t-17 6q-8 2-17 2-14 0-27-6-12-6-21-16-8-9-13-22-5-12-5-25zM494 241q-15 0-27-6t-21-15q-9-10-14-22-4-12-4-25 0-14 5-26t14-22q9-9 21-14 12-6 27-6t27 6q12 6 21 15 9 10 14 22 4 12 4 25t-5 26q-5 12-14 21-8 10-21 15-12 6-27 6zm-35-68q0 8 3 15 2 7 6 13 5 6 11 9 7 3 16 3 8 0 15-3 7-4 11-9 4-6 6-13 3-8 3-15 0-8-3-15-2-8-6-13-5-6-12-9-6-4-14-4-9 0-16 4-6 3-11 9l-7 13q-2 7-2 15zM579 240V106h61q9 0 17 4t14 10q6 6 9 15 4 8 4 16l-2 12q-1 6-4 11l-7 9-9 7 29 50h-35l-25-43h-21v43h-31zm31-70h29q5 0 9-6 4-5 4-13t-4-13q-5-5-10-5h-28v37zM800 213v27h-94V106h93v27h-62v26h53v25h-53v29h63z' font-family='Raleway' font-weight='800' letter-spacing='0' style='line-height:89.99999762%;-inkscape-font-specification:&quot;Raleway Ultra-Bold&quot;' word-spacing='0'/><path fill='#ee8100' fill-rule='evenodd' d='M-143 358h363v586h-363zM571 358h363v586H571z'/><path fill='#fff' fill-opacity='.4' d='M637 780V514h99q33 0 57 10 25 11 42 29 16 18 25 42 8 24 8 52 0 30-9 55-9 24-27 41-17 18-42 27-24 10-54 10h-99zm169-133q0-18-5-32-5-15-14-25-9-11-22-16-13-6-29-6h-38v158h38q17 0 30-6t21-17q9-10 14-25 5-14 5-31z' font-family='Raleway' font-weight='800' letter-spacing='0' style='line-height:89.99999762%;-inkscape-font-specification:&quot;Raleway Ultra-Bold&quot;' word-spacing='0'/><path fill='#fecb02' fill-rule='evenodd' d='M188 358h384v586H188z'/><path fill='#85bb2f' fill-rule='evenodd' d='M207 358h-363v586h363z'/><path fill='#fff' fill-opacity='.4' d='M259 642q0-24 9-47 9-24 26-43t42-30q25-12 56-12 38 0 65 16 28 16 41 42l-47 33q-5-10-12-17-6-7-15-11-8-5-17-6l-16-2q-18 0-31 7t-22 18q-8 12-13 26-4 14-4 29t5 30q5 15 14 26t22 18q13 6 29 6 9 0 17-2 9-2 17-6l15-11q7-7 11-18l50 30q-6 15-18 26-12 12-27 20t-32 12q-18 4-34 4-29 0-53-12t-42-31q-17-20-27-44-9-25-9-51zM155 712q0 17-8 30-7 12-19 21-12 8-29 13-16 4-35 4H-65V514H83q14 0 25 6t19 16q8 9 12 21t4 25q0 19-9 36-10 17-29 26 23 6 36 23 14 18 14 45zm-63-13q0-12-7-21-7-8-18-8H-4v58h68q12 0 20-8t8-21zM-4 566v55h60q11 0 18-6 8-7 8-21 0-13-7-20-7-8-16-8H-4z' font-family='Raleway' font-weight='800' letter-spacing='0' style='line-height:89.99999762%;-inkscape-font-specification:&quot;Raleway Ultra-Bold&quot;' word-spacing='0'/><path fill='#0039ff' fill-opacity='.6' fill-rule='evenodd' stroke='#fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='61' d='M-373 282h40c108 0 196 87 196 196v344c0 108-88 196-196 196h-40c-108 0-196-88-196-196V478c0-109 88-196 196-196z'/><path fill='#038141' fill-rule='evenodd' d='M-373 282h40c108 0 196 87 196 196v344c0 108-88 196-196 196h-40c-108 0-196-88-196-196V478c0-109 88-196 196-196z'/><path fill='#fff' d='M-386 482h67l117 350h-76l-25-78h-100l-25 78h-76l118-350zm71 216-38-124-38 124h76z' font-family='Raleway' font-weight='800' letter-spacing='0' style='line-height:89.99999762%;-inkscape-font-specification:&quot;Raleway Ultra-Bold&quot;' word-spacing='0'/></svg >",
+            B: "<svg xmlns='http://www.w3.org/2000/svg' width='240' height='130' viewBox='0 0 744 1052'><path fill = '#fff' fill-rule='evenodd' d = 'M-419 0h1582c100 0 180 80 180 180v633c0 99-80 180-180 180H-419c-100 0-180-81-180-180V180C-599 80-519 0-419 0z' /><path fill='#038141' fill-rule='evenodd' d='M-309 358H55v586h-364z'/><path fill='#e63e11' fill-rule='evenodd' d='M749 358h363v586H749z'/><path fill='#038141' fill-rule='evenodd' d='M-382 358h90c76 0 136 61 136 136v314c0 75-60 136-136 136h-90c-76 0-137-61-137-136V494c0-75 61-136 137-136z'/><path fill='#ee8100' fill-rule='evenodd' d='M571 358h363v586H571z'/><path fill='#fff' fill-opacity='.4' d='M637 780V514h99q33 0 57 10 25 11 42 29 16 18 25 42 8 24 8 52 0 30-9 55-9 24-27 41-17 18-42 27-24 10-54 10h-99zm169-133q0-18-5-32-5-15-14-25-9-11-22-16-13-6-29-6h-38v158h38q17 0 30-6t21-17q9-10 14-25 5-14 5-31z' font-family='Raleway' font-weight='800' letter-spacing='0' style='line-height:89.99999762%;-inkscape-font-specification:&quot;Raleway Ultra-Bold&quot;' word-spacing='0'/><path fill='#fecb02' fill-rule='evenodd' d='M188 358h384v586H188z'/><path fill='#85bb2f' fill-rule='evenodd' d='M207 358h-363v586h363z'/><path fill='#fff' fill-opacity='.4' d='M293 642q0-24 9-47 9-24 26-43 18-19 42-30 25-12 57-12 37 0 64 16 28 16 41 42l-47 33q-4-10-11-17t-15-11q-9-5-17-6l-17-2q-18 0-31 7t-21 18q-9 12-13 26t-4 29q0 15 5 30 4 15 13 26 10 11 23 18 13 6 29 6l17-2q9-2 16-6 9-5 15-11 7-7 11-18l50 30q-6 15-18 26-11 12-26 20-16 8-33 12t-34 4q-29 0-53-12t-41-31q-18-20-27-44-10-25-10-51zM155 721q0 17-8 30-7 13-19 21t-29 13q-16 4-35 4H-65V523H83q14 0 25 6t19 16q8 9 12 22 4 12 4 24 0 19-9 36-10 17-29 26 23 7 36 24 14 17 14 44zm-63-12q0-13-7-21-7-9-18-9H-4v58h68q12 0 20-8t8-20zM-4 576v55h60q11 0 18-7 8-7 8-21 0-13-7-20t-16-7H-4z' font-family='Raleway' font-weight='800' letter-spacing='0' style='line-height:89.99999762%;-inkscape-font-specification:&quot;Raleway Ultra-Bold&quot;' word-spacing='0'/><path fill='#0039ff' fill-opacity='.6' fill-rule='evenodd' stroke='#fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='61' d='M8 282h39c109 0 196 87 196 196v344c0 108-87 196-196 196H8c-109 0-196-88-196-196V478c0-109 87-196 196-196z'/><path fill='#fff' fill-opacity='.4' d='M-385 514h56l97 266h-63l-21-60h-83l-20 60h-63l97-266zm59 164-31-94-32 94h63z' font-family='Raleway' font-weight='800' letter-spacing='0' style='line-height:89.99999762%;-inkscape-font-specification:&quot;Raleway Ultra-Bold&quot;' word-spacing='0'/><path fill='#e63e11' fill-rule='evenodd' d='M1070 358h90c76 0 136 61 136 136v314c0 75-60 136-136 136h-90c-76 0-137-61-137-136V494c0-75 61-136 137-136z'/><path fill='#fff' fill-opacity='.4' d='M1189 726v54h-187V514h183v54h-122v52h105v49h-105v57h126z' font-family='Raleway' font-weight='800' letter-spacing='0' style='line-height:89.99999762%;-inkscape-font-specification:&quot;Raleway Ultra-Bold&quot;' word-spacing='0'/><path fill='#85bb2f' fill-rule='evenodd' d='M8 282h39c109 0 196 87 196 196v344c0 108-87 196-196 196H8c-109 0-196-88-196-196V478c0-109 87-196 196-196z'/><path fill='#fff' d='M173 742q0 23-8 40-9 17-24 28t-35 17q-19 5-42 5H-92V482H87q16 0 30 8 13 8 23 20 9 13 14 29 6 16 6 33 0 25-12 47-11 22-34 34 27 8 43 31t16 58zm-75-16q0-16-9-28-8-11-22-11h-85v77h82q15 0 24-11 10-10 10-27zM-18 551v72h73q12 0 22-8 9-9 9-28 0-17-9-27-8-9-19-9h-76z' font-family='Raleway' font-weight='800' letter-spacing='0' style='line-height:89.99999762%;-inkscape-font-specification:&quot;Raleway Ultra-Bold&quot;' word-spacing='0'/><path fill='#7d7d7d' d='M-443 163v77h-31V106h24l62 79v-79h31v134h-25l-61-77zM-273 213q8 0 13-3 6-3 9-9 4-5 5-12 2-7 2-15v-68h31v68q0 14-4 26-3 13-11 22-7 9-18 14t-27 5q-16 0-27-5-12-6-19-15t-10-21q-4-12-4-26v-68h31v68q0 8 2 15l5 13q3 5 9 8 5 3 13 3zM-87 133h-41v107h-31V133h-41v-27h113v27zM-72 240V106h61q9 0 17 4t14 10q6 6 9 15 4 8 4 16l-2 12-4 11-7 9-9 7 29 50H5l-26-43h-20v43h-31zm31-70h28q6 0 10-6 4-5 4-13t-5-13q-4-5-9-5h-28v37zM55 240V106h31v134H55zM109 202v-28h58v28h-58zM271 145l-4-3-8-4-12-4-12-2q-16 0-16 11l1 6 6 4 9 3 12 4q9 2 17 6 8 3 13 7 6 5 9 12 3 6 3 15 0 12-5 20-4 7-11 12t-16 7q-9 2-19 2l-15-1-15-3-14-5-13-7 14-27 5 3 10 6 14 4q7 2 15 2 16 0 16-10l-2-6-7-4-10-4-13-4-16-6q-7-3-12-8-4-4-6-10-2-5-2-13 0-10 4-19 4-8 10-13 7-6 16-9t19-3l14 2 13 3 12 5 10 5-14 26zM299 172q0-12 5-24 4-12 13-22 9-9 21-15 13-6 28-6 19 0 33 8t21 21l-24 17q-2-5-6-9l-7-6-9-3-8-1q-9 0-16 4l-11 9q-4 6-6 13t-2 15q0 8 2 15 3 8 7 13 5 6 11 9 7 3 15 3h9l8-4 8-5 5-9 26 15q-3 7-10 13-5 6-13 10t-17 6q-8 2-17 2-14 0-27-6-12-6-21-16-8-9-13-22-5-12-5-25zM494 241q-15 0-27-6t-21-15q-9-10-14-22-4-12-4-25 0-14 5-26t14-22q9-9 21-14 12-6 27-6t27 6q12 6 21 15 9 10 14 22 4 12 4 25t-5 26q-5 12-14 21-8 10-21 15-12 6-27 6zm-35-68q0 8 3 15 2 7 6 13 5 6 11 9 7 3 16 3 8 0 15-3 7-4 11-9 4-6 6-13 3-8 3-15 0-8-3-15-2-8-6-13-5-6-12-9-6-4-14-4-9 0-16 4-6 3-11 9l-7 13q-2 7-2 15zM579 240V106h61q9 0 17 4t14 10q6 6 9 15 4 8 4 16l-2 12q-1 6-4 11l-7 9-9 7 29 50h-35l-25-43h-21v43h-31zm31-70h29q5 0 9-6 4-5 4-13t-4-13q-5-5-10-5h-28v37zM800 213v27h-94V106h93v27h-62v26h53v25h-53v29h63z' font-family='Raleway' font-weight='800' letter-spacing='0' style='line-height:89.99999762%;-inkscape-font-specification:&quot;Raleway Ultra-Bold&quot;' word-spacing='0'/></svg >",
+            C: "<svg xmlns='http://www.w3.org/2000/svg' width='240' height='130' viewBox='0 0 744 1052' ><path fill='#fff' fill-rule='evenodd' d='M-419 0h1582c100 0 180 80 180 180v633c0 99-80 180-180 180H-419c-100 0-180-81-180-180V180C-599 80-519 0-419 0Z'/><path fill='#038141' fill-rule='evenodd' d='M-309 358H55v586h-364z'/><path fill='#e63e11' fill-rule='evenodd' d='M749 358h363v586H749z'/><path fill='#038141' fill-rule='evenodd' d='M-382 358h90c76 0 136 61 136 136v314c0 75-60 136-136 136h-90c-76 0-137-61-137-136V494c0-75 61-136 137-136z'/><path fill='#ee8100' fill-rule='evenodd' d='M571 358h363v586H571z'/><path fill='#fff' fill-opacity='.4' d='M660 780V514h99q33 0 57 10 25 11 42 29 16 18 25 42 8 24 8 52 0 30-9 55-9 24-27 41-17 18-42 27-24 10-54 10h-99zm169-133q0-18-5-32-5-15-14-25-9-11-22-16-13-6-29-6h-38v158h38q17 0 30-6t21-17q9-10 14-25 5-14 5-31z' font-family='Raleway' font-weight='800' letter-spacing='0' style='line-height:89.99999762%;-inkscape-font-specification:&quot' word-spacing='0'/><path fill='#fecb02' fill-rule='evenodd' d='M188 358h384v586H188z'/><path fill='#85bb2f' fill-rule='evenodd' d='M207 358h-363v586h363z'/><path fill='#fff' fill-opacity='.4' d='M259 654q0-24 9-48t26-42q17-19 42-31 25-11 56-11 38 0 65 16 28 16 41 42l-47 33q-5-11-12-18-6-7-15-11-8-4-17-6l-16-2q-18 0-31 8-13 7-22 18-8 11-13 25-4 15-4 29 0 16 5 30 5 15 14 26 9 12 22 18 13 7 29 7 9 0 17-2 9-2 17-7 8-4 15-11t11-17l50 30q-6 14-18 26-12 11-27 19t-32 12q-18 4-34 4-29 0-53-11-24-12-42-32-17-19-27-44-9-25-9-50zM97 712q0 17-7 30-7 12-19 21-13 8-29 13-17 4-35 4h-130V514H25q14 0 25 6 12 6 19 16 8 9 12 21 5 12 5 25 0 19-10 36-9 17-28 26 23 6 36 23 13 18 13 45zm-62-13q0-12-7-21-8-8-18-8h-71v58H7q12 0 20-8t8-21zm-96-133v55h60q10 0 18-6 8-7 8-21 0-13-7-20-7-8-17-8h-62z' font-family='Raleway' font-weight='800' letter-spacing='0' style='line-height:89.99999762%;-inkscape-font-specification:&quot' word-spacing='0'/><path fill='#0039ff' fill-opacity='.6' fill-rule='evenodd' stroke='#fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='61' d='M360 282h40c108 0 196 87 196 196v344c0 108-88 196-196 196h-40c-108 0-196-88-196-196V478c0-109 88-196 196-196z'/><path fill='#fff' fill-opacity='.4' d='M-385 514h56l97 266h-63l-21-60h-83l-20 60h-63l97-266zm59 164-31-94-32 94h63z' font-family='Raleway' font-weight='800' letter-spacing='0' style='line-height:89.99999762%;-inkscape-font-specification:&quot' word-spacing='0'/><path fill='#e63e11' fill-rule='evenodd' d='M1070 358h90c76 0 136 61 136 136v314c0 75-60 136-136 136h-90c-76 0-137-61-137-136V494c0-75 61-136 137-136z'/><path fill='#fff' fill-opacity='.4' d='M1189 726v54h-187V514h183v54h-122v52h105v49h-105v57h126z' font-family='Raleway' font-weight='800' letter-spacing='0' style='line-height:89.99999762%;-inkscape-font-specification:&quot' word-spacing='0'/><path fill='#fecb02' fill-rule='evenodd' d='M360 282h40c108 0 196 87 196 196v344c0 108-88 196-196 196h-40c-108 0-196-88-196-196V478c0-109 88-196 196-196z'/><path fill='#fff' d='M228 654q0-32 11-63t32-56q21-25 51-40t68-15q45 0 78 21t50 55l-57 44q-6-14-14-23t-18-15q-10-6-21-8l-20-2q-21 0-37 9-16 10-27 24-10 15-15 34t-5 38q0 21 6 40t17 34q11 15 26 24 16 8 36 8l20-2q11-3 20-9 10-6 19-15 8-9 13-22l60 39q-7 19-21 34-14 16-33 26-18 10-39 16-21 5-41 5-35 0-64-15-29-16-51-42-20-25-32-58-12-32-12-66z' font-family='Raleway' font-weight='800' letter-spacing='0' style='line-height:89.99999762%;-inkscape-font-specification:&quot' word-spacing='0'/><path fill='#7d7d7d' d='M-443 163v77h-31V106h24l62 79v-79h31v134h-25l-61-77zM-273 213q8 0 13-3 6-3 9-9 4-5 5-12 2-7 2-15v-68h31v68q0 14-4 26-3 13-11 22-7 9-18 14t-27 5q-16 0-27-5-12-6-19-15t-10-21q-4-12-4-26v-68h31v68q0 8 2 15l5 13q3 5 9 8 5 3 13 3zM-87 133h-41v107h-31V133h-41v-27h113v27zM-72 240V106h61q9 0 17 4t14 10q6 6 9 15 4 8 4 16l-2 12-4 11-7 9-9 7 29 50H5l-26-43h-20v43h-31zm31-70h28q6 0 10-6 4-5 4-13t-5-13q-4-5-9-5h-28v37zM55 240V106h31v134H55zM109 202v-28h58v28h-58zM271 145l-4-3-8-4-12-4-12-2q-16 0-16 11l1 6 6 4 9 3 12 4q9 2 17 6 8 3 13 7 6 5 9 12 3 6 3 15 0 12-5 20-4 7-11 12t-16 7q-9 2-19 2l-15-1-15-3-14-5-13-7 14-27 5 3 10 6 14 4q7 2 15 2 16 0 16-10l-2-6-7-4-10-4-13-4-16-6q-7-3-12-8-4-4-6-10-2-5-2-13 0-10 4-19 4-8 10-13 7-6 16-9t19-3l14 2 13 3 12 5 10 5-14 26zM299 172q0-12 5-24 4-12 13-22 9-9 21-15 13-6 28-6 19 0 33 8t21 21l-24 17q-2-5-6-9l-7-6-9-3-8-1q-9 0-16 4l-11 9q-4 6-6 13t-2 15q0 8 2 15 3 8 7 13 5 6 11 9 7 3 15 3h9l8-4 8-5 5-9 26 15q-3 7-10 13-5 6-13 10t-17 6q-8 2-17 2-14 0-27-6-12-6-21-16-8-9-13-22-5-12-5-25zM494 241q-15 0-27-6t-21-15q-9-10-14-22-4-12-4-25 0-14 5-26t14-22q9-9 21-14 12-6 27-6t27 6q12 6 21 15 9 10 14 22 4 12 4 25t-5 26q-5 12-14 21-8 10-21 15-12 6-27 6zm-35-68q0 8 3 15 2 7 6 13 5 6 11 9 7 3 16 3 8 0 15-3 7-4 11-9 4-6 6-13 3-8 3-15 0-8-3-15-2-8-6-13-5-6-12-9-6-4-14-4-9 0-16 4-6 3-11 9l-7 13q-2 7-2 15zM579 240V106h61q9 0 17 4t14 10q6 6 9 15 4 8 4 16l-2 12q-1 6-4 11l-7 9-9 7 29 50h-35l-25-43h-21v43h-31zm31-70h29q5 0 9-6 4-5 4-13t-4-13q-5-5-10-5h-28v37zM800 213v27h-94V106h93v27h-62v26h53v25h-53v29h63z' font-family='Raleway' font-weight='800' letter-spacing='0' style='line-height:89.99999762%;-inkscape-font-specification:&quot' word-spacing='0'/></svg>",
+            D: "<svg xmlns='http://www.w3.org/2000/svg' width='240' height='130' viewBox='0 0 744 1052'><path fill='#fff' fill-rule='evenodd' d='M-419 0h1582c100 0 180 80 180 180v633c0 99-80 180-180 180H-419c-100 0-180-81-180-180V180C-599 80-519 0-419 0z' /><path fill='#038141' fill-rule='evenodd' d='M-309 358H55v586h-364z' /><path fill='#e63e11' fill-rule='evenodd' d='M749 358h363v586H749z' /><path fill='#038141' fill-rule='evenodd' d='M-382 358h90c76 0 136 61 136 136v314c0 75-60 136-136 136h-90c-76 0-137-61-137-136V494c0-75 61-136 137-136z' /><path fill='#ee8100' fill-rule='evenodd' d='M571 358h363v586H571z' /><path fill='#fff' fill-opacity='.4' d='M637 789V523h99q33 0 57 11 25 10 42 28 16 18 25 42 8 24 8 52 0 30-9 55-9 24-27 42-17 17-42 27-24 9-54 9h-99zm169-133q0-18-5-32-5-15-14-25-9-11-22-16-13-6-29-6h-38v158h38q17 0 30-6t21-16q9-11 14-25 5-15 5-32z' font-family='Raleway' font-weight='800' letter-spacing='0' style='line-height:89.99999762%;-inkscape-font-specification:&quot' word-spacing='0' /><path fill='#fecb02' fill-rule='evenodd' d='M188 358h384v586H188z' /><path fill='#85bb2f' fill-rule='evenodd' d='M207 358h-363v586h363z' /><path fill='#fff' fill-opacity='.4' d='M230 642q0-24 9-47 9-24 27-43 17-19 42-30 24-12 56-12 37 0 64 16 28 16 42 42l-48 33q-4-10-11-17t-15-11q-8-5-17-6l-17-2q-17 0-31 7-13 7-21 18-9 12-13 26t-4 29q0 15 5 30t14 26q9 11 22 18 13 6 29 6l17-2q9-2 17-6l15-11q6-7 10-18l51 30q-6 15-18 26-12 12-27 20-16 8-33 12t-34 4q-28 0-53-12-24-12-41-31-18-20-27-44-10-25-10-51zM155 712q0 17-8 30-7 12-19 21-12 8-29 13-16 4-35 4H-65V514H83q14 0 25 6t19 16q8 9 12 21t4 25q0 19-9 36-10 17-29 26 23 6 36 23 14 18 14 45zm-63-13q0-12-7-21-7-8-18-8H-4v58h68q12 0 20-8t8-21zM-4 566v55h60q11 0 18-6 8-7 8-21 0-13-7-20-7-8-16-8H-4zM-385 514h56l97 266h-63l-21-60h-83l-20 60h-63l97-266zm59 164-31-94-32 94h63z' font-family='Raleway' font-weight='800' letter-spacing='0' style='line-height:89.99999762%;-inkscape-font-specification:&quot' word-spacing='0' /><path fill='#e63e11' fill-rule='evenodd' d='M1070 358h90c76 0 136 61 136 136v314c0 75-60 136-136 136h-90c-76 0-137-61-137-136V494c0-75 61-136 137-136z' /><path fill='#0039ff' fill-opacity='.6' fill-rule='evenodd' stroke='#fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='61' d='M733 282h39c109 0 196 87 196 196v344c0 108-87 196-196 196h-39c-109 0-196-88-196-196V478c0-109 87-196 196-196z' /><path fill='#fff' fill-opacity='.4' d='M1233 726v54h-186V514h183v54h-122v52h105v49h-105v57h125z' font-family='Raleway' font-weight='800' letter-spacing='0' style='line-height:89.99999762%;-inkscape-font-specification:&quot' word-spacing='0' /><path fill='#ee8100' fill-rule='evenodd' d='M733 282h39c109 0 196 87 196 196v344c0 108-87 196-196 196h-39c-109 0-196-88-196-196V478c0-109 87-196 196-196z' /><path fill='#fff' d='M612 832V482h120q40 0 70 14 30 13 50 37t30 56q11 31 11 67 0 40-12 73-11 32-32 55t-51 36q-29 12-66 12H612zm205-176q0-23-6-41-5-20-16-34-11-13-27-21-16-7-36-7h-45v208h45q21 0 37-8 15-8 26-21 11-15 16-34 6-19 6-42z' font-family='Raleway' font-weight='800' letter-spacing='0' style='line-height:89.99999762%;-inkscape-font-specification:&quot' word-spacing='0' /><path fill='#7d7d7d' d='M-443 163v77h-31V106h24l62 79v-79h31v134h-25l-61-77zM-273 213q8 0 13-3 6-3 9-9 4-5 5-12 2-7 2-15v-68h31v68q0 14-4 26-3 13-11 22-7 9-18 14t-27 5q-16 0-27-5-12-6-19-15t-10-21q-4-12-4-26v-68h31v68q0 8 2 15l5 13q3 5 9 8 5 3 13 3zM-87 133h-41v107h-31V133h-41v-27h113v27zM-72 240V106h61q9 0 17 4t14 10q6 6 9 15 4 8 4 16l-2 12-4 11-7 9-9 7 29 50H5l-26-43h-20v43h-31zm31-70h28q6 0 10-6 4-5 4-13t-5-13q-4-5-9-5h-28v37zM55 240V106h31v134H55zM109 202v-28h58v28h-58zM271 145l-4-3-8-4-12-4-12-2q-16 0-16 11l1 6 6 4 9 3 12 4q9 2 17 6 8 3 13 7 6 5 9 12 3 6 3 15 0 12-5 20-4 7-11 12t-16 7q-9 2-19 2l-15-1-15-3-14-5-13-7 14-27 5 3 10 6 14 4q7 2 15 2 16 0 16-10l-2-6-7-4-10-4-13-4-16-6q-7-3-12-8-4-4-6-10-2-5-2-13 0-10 4-19 4-8 10-13 7-6 16-9t19-3l14 2 13 3 12 5 10 5-14 26zM299 172q0-12 5-24 4-12 13-22 9-9 21-15 13-6 28-6 19 0 33 8t21 21l-24 17q-2-5-6-9l-7-6-9-3-8-1q-9 0-16 4l-11 9q-4 6-6 13t-2 15q0 8 2 15 3 8 7 13 5 6 11 9 7 3 15 3h9l8-4 8-5 5-9 26 15q-3 7-10 13-5 6-13 10t-17 6q-8 2-17 2-14 0-27-6-12-6-21-16-8-9-13-22-5-12-5-25zM494 241q-15 0-27-6t-21-15q-9-10-14-22-4-12-4-25 0-14 5-26t14-22q9-9 21-14 12-6 27-6t27 6q12 6 21 15 9 10 14 22 4 12 4 25t-5 26q-5 12-14 21-8 10-21 15-12 6-27 6zm-35-68q0 8 3 15 2 7 6 13 5 6 11 9 7 3 16 3 8 0 15-3 7-4 11-9 4-6 6-13 3-8 3-15 0-8-3-15-2-8-6-13-5-6-12-9-6-4-14-4-9 0-16 4-6 3-11 9l-7 13q-2 7-2 15zM579 240V106h61q9 0 17 4t14 10q6 6 9 15 4 8 4 16l-2 12q-1 6-4 11l-7 9-9 7 29 50h-35l-25-43h-21v43h-31zm31-70h29q5 0 9-6 4-5 4-13t-4-13q-5-5-10-5h-28v37zM800 213v27h-94V106h93v27h-62v26h53v25h-53v29h63z' font-family='Raleway' font-weight='800' letter-spacing='0' style='line-height:89.99999762%;-inkscape-font-specification:&quot' word-spacing='0' /></svg>",
+            E: "<svg xmlns='http://www.w3.org/2000/svg' width='240' height='130' viewBox='0 0 744 1052'><path fill='#fff' fill-rule='evenodd' d='M-419 0h1582c100 0 180 80 180 180v633c0 99-80 180-180 180H-419c-100 0-180-81-180-180V180C-599 80-519 0-419 0z'/><path fill='#038141' fill-rule='evenodd' d='M-309 358H55v586h-364z'/><path fill='#e63e11' fill-rule='evenodd' d='M749 358h363v586H749z'/><path fill='#038141' fill-rule='evenodd' d='M-382 358h90c76 0 136 61 136 136v314c0 75-60 136-136 136h-90c-76 0-137-61-137-136V494c0-75 61-136 137-136z'/><path fill='#ee8100' fill-rule='evenodd' d='M571 358h363v586H571z'/><path fill='#fff' fill-opacity='.4' d='M600 780V514h99q33 0 58 10 25 11 41 29 17 18 25 42 9 24 9 52 0 30-10 55-9 24-26 41-18 18-42 27-25 10-55 10h-99zm169-133q0-18-5-32-4-15-13-25-9-11-22-16-13-6-30-6h-38v158h38q17 0 30-6t22-17q9-10 13-25 5-14 5-31z' font-family='Raleway' font-weight='800' letter-spacing='0' style='line-height:89.99999762%;-inkscape-font-specification:&quot' word-spacing='0'/><path fill='#fecb02' fill-rule='evenodd' d='M188 358h384v586H188z'/><path fill='#85bb2f' fill-rule='evenodd' d='M207 358h-363v586h363z'/><path fill='#fff' fill-opacity='.4' d='M259 642q0-24 9-47 9-24 26-43t42-30q25-12 56-12 38 0 65 16 28 16 41 42l-47 33q-5-10-12-17-6-7-15-11-8-5-17-6l-16-2q-18 0-31 7t-22 18q-8 12-13 26-4 14-4 29t5 30q5 15 14 26t22 18q13 6 29 6 9 0 17-2 9-2 17-6l15-11q7-7 11-18l50 30q-6 15-18 26-12 12-27 20t-32 12q-18 4-34 4-29 0-53-12t-42-31q-17-20-27-44-9-25-9-51zM155 712q0 17-8 30-7 12-19 21-12 8-29 13-16 4-35 4H-65V514H83q14 0 25 6t19 16q8 9 12 21t4 25q0 19-9 36-10 17-29 26 23 6 36 23 14 18 14 45zm-63-13q0-12-7-21-7-8-18-8H-4v58h68q12 0 20-8t8-21zM-4 566v55h60q11 0 18-6 8-7 8-21 0-13-7-20-7-8-16-8H-4z' font-family='Raleway' font-weight='800' letter-spacing='0' style='line-height:89.99999762%;-inkscape-font-specification:&quot' word-spacing='0'/><path fill='#0039ff' fill-opacity='.6' fill-rule='evenodd' stroke='#fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='61' d='M1076 282h39c109 0 196 87 196 196v344c0 108-87 196-196 196h-39c-109 0-197-88-197-196V478c0-109 88-196 197-196z'/><path fill='#fff' fill-opacity='.4' d='M-385 514h56l97 266h-63l-21-60h-83l-20 60h-63l97-266zm59 164-31-94-32 94h63z' font-family='Raleway' font-weight='800' letter-spacing='0' style='line-height:89.99999762%;-inkscape-font-specification:&quot' word-spacing='0'/><path fill='#e63e11' fill-rule='evenodd' d='M1070 358h90c76 0 136 61 136 136v314c0 75-60 136-136 136h-90c-76 0-137-61-137-136V494c0-75 61-136 137-136z'/><path fill='#fff' fill-opacity='.4' d='M1189 726v54h-187V514h183v54h-122v52h105v49h-105v57h126z' font-family='Raleway' font-weight='800' letter-spacing='0' style='line-height:89.99999762%;-inkscape-font-specification:&quot' word-spacing='0'/><path fill='#e63e11' fill-rule='evenodd' d='M1076 282h39c109 0 196 87 196 196v344c0 108-87 196-196 196h-39c-109 0-197-88-197-196V478c0-109 88-196 197-196z'/><path fill='#fff' d='M1188 761v71H962V482h222v71h-147v68h126v66h-126v74h151z' font-family='Raleway' font-weight='800' letter-spacing='0' style='line-height:89.99999762%;-inkscape-font-specification:&quot' word-spacing='0'/><path fill='#7d7d7d' d='M-443 163v77h-31V106h24l62 79v-79h31v134h-25l-61-77zM-273 213q8 0 13-3 6-3 9-9 4-5 5-12 2-7 2-15v-68h31v68q0 14-4 26-3 13-11 22-7 9-18 14t-27 5q-16 0-27-5-12-6-19-15t-10-21q-4-12-4-26v-68h31v68q0 8 2 15l5 13q3 5 9 8 5 3 13 3zM-87 133h-41v107h-31V133h-41v-27h113v27zM-72 240V106h61q9 0 17 4t14 10q6 6 9 15 4 8 4 16l-2 12-4 11-7 9-9 7 29 50H5l-26-43h-20v43h-31zm31-70h28q6 0 10-6 4-5 4-13t-5-13q-4-5-9-5h-28v37zM55 240V106h31v134H55zM109 202v-28h58v28h-58zM271 145l-4-3-8-4-12-4-12-2q-16 0-16 11l1 6 6 4 9 3 12 4q9 2 17 6 8 3 13 7 6 5 9 12 3 6 3 15 0 12-5 20-4 7-11 12t-16 7q-9 2-19 2l-15-1-15-3-14-5-13-7 14-27 5 3 10 6 14 4q7 2 15 2 16 0 16-10l-2-6-7-4-10-4-13-4-16-6q-7-3-12-8-4-4-6-10-2-5-2-13 0-10 4-19 4-8 10-13 7-6 16-9t19-3l14 2 13 3 12 5 10 5-14 26zM299 172q0-12 5-24 4-12 13-22 9-9 21-15 13-6 28-6 19 0 33 8t21 21l-24 17q-2-5-6-9l-7-6-9-3-8-1q-9 0-16 4l-11 9q-4 6-6 13t-2 15q0 8 2 15 3 8 7 13 5 6 11 9 7 3 15 3h9l8-4 8-5 5-9 26 15q-3 7-10 13-5 6-13 10t-17 6q-8 2-17 2-14 0-27-6-12-6-21-16-8-9-13-22-5-12-5-25zM494 241q-15 0-27-6t-21-15q-9-10-14-22-4-12-4-25 0-14 5-26t14-22q9-9 21-14 12-6 27-6t27 6q12 6 21 15 9 10 14 22 4 12 4 25t-5 26q-5 12-14 21-8 10-21 15-12 6-27 6zm-35-68q0 8 3 15 2 7 6 13 5 6 11 9 7 3 16 3 8 0 15-3 7-4 11-9 4-6 6-13 3-8 3-15 0-8-3-15-2-8-6-13-5-6-12-9-6-4-14-4-9 0-16 4-6 3-11 9l-7 13q-2 7-2 15zM579 240V106h61q9 0 17 4t14 10q6 6 9 15 4 8 4 16l-2 12q-1 6-4 11l-7 9-9 7 29 50h-35l-25-43h-21v43h-31zm31-70h29q5 0 9-6 4-5 4-13t-4-13q-5-5-10-5h-28v37zM800 213v27h-94V106h93v27h-62v26h53v25h-53v29h63z' font-family='Raleway' font-weight='800' letter-spacing='0' style='line-height:89.99999762%;-inkscape-font-specification:&quot' word-spacing='0'/></svg>"
+        };
+
+        function init() {
+            sel = document.querySelector('#ingredients_select');
+            for (const ingredient in aliments) {
+                const opt = document.createElement("option");
+                opt.value = ingredient;
+                opt.text = ingredient;
+                sel.add(opt);
+            }
+            const lang = 'fr';
+            const optionNodes = Array.from(sel.children);
+            const comparator = new Intl.Collator(lang.slice(0, 2)).compare;
+
+            optionNodes.sort((a, b) => comparator(a.textContent, b.textContent));
+            optionNodes.forEach((option) => sel.appendChild(option));
+        }
+
+        function addIngredient() {
+            let label = document.createElement('div');
+            let ingredient = document.querySelector('#ingredients_select').value;
+            label.textContent = ingredient;
+            label.innerHTML = "<label>" + ingredient + " <input class='masse_ingredient' id=\"" + ingredient + "\"></input></label>";
+            document.querySelector('fieldset#ingredients').append(label);
+        }
+
+        function computeIngredients() {
+            var nutriInfo = {
+                'energy': 0,
+                'fibers': 0,
+                'fruits_vegetables_percentage': 0,
+                'proteins': 0,
+                'saturated_fats': 0,
+                'salt': 0,
+                'sugar': 0
+            };
+            var items = ['energy', 'fibers', 'fruits_vegetables_percentage', 'proteins', 'saturated_fats', 'salt', 'sugar'];
+            var masse_pf = document.querySelector('#masse_pf').value;
+            var f_and_v_mass = 0;
+            for (const item of items) {
+                document.querySelectorAll("input.masse_ingredient").forEach((el) => {
+                    var ingredient = el.id;
+                    var masse = el.value;
+                    if (item == 'fruits_vegetables_percentage') {
+                        f_and_v_mass += (el.value * aliments[ingredient].fruits_vegetables_percentage / 100);
+                    } else {
+                        nutriInfo[item] += Math.round((aliments[ingredient][item] * (masse / 100) / masse_pf * 100));
+                    }
+                })
+                console.log({ f_and_v_mass });
+                nutriInfo.fruits_vegetables_percentage = Math.round(f_and_v_mass / masse_pf * 100);
+                // document.querySelectorAll('.masseIng').forEach((el) => {
+                //     var ingredient = el.id.split('_')[1];
+                //     var masse = el.value;
+                //     //console.log("DEBUG " + item + " | " + ingredient + " : " + aliments[ingredient][item] * (masse / 100) * (100 / parseInt(document.querySelector('#masse_pf').value)));
+                //     nutriInfo[item] += Math.round((aliments[ingredient][item] * (masse / 100) / masse_pf * 100));
+                // });
+            }
+
+            console.log(nutriInfo);
+
+            const ns_result = compute_FNS(nutriInfo.energy, nutriInfo.sugar, nutriInfo.saturated_fats, nutriInfo.salt, nutriInfo.proteins, nutriInfo.fibers, nutriInfo.fruits_vegetables_percentage, false, false);
+            const ns_class = ns_result.FNS.class;
+            const ns_score = ns_result.FNS.score;
+            console.log(ns_class);
+            console.log(ns_score);
+
+            document.querySelector('#nutriscore').innerHTML = svg[ns_class];
+            nutriDataTxt = "<!--NS\n";
+            dataElements = ['energy', 'sugar', 'saturated_fats', 'salt', 'proteins', 'fibers', 'fruits_vegetables_percentage']
+            for (const element of dataElements) {
+                console.log(element);
+                nutriDataTxt += element + " : " + ns_result[element].value + " | " + ns_result[element].score + "\n";
+            }
+            nutriDataTxt += '_________________________\n'
+            nutriDataTxt += 'NS_Class : ' + ns_result.FNS.class + "\n"
+            nutriDataTxt += 'NS_Score : ' + ns_result.FNS.score + "\n-->";
+            console.log(ns_result);
+
+            // nutriDataTxt = "<!--NS\n";
+            // var nutriInfoArray = Object.keys(nutriInfo).map((key) => [key, nutriInfo[key]]);
+            // for (const i of nutriInfoArray) {
+            //     nutriDataTxt += i[0] + ": " + i[1] + "\n";
+            // }
+            // nutriDataTxt += "SCORE:" + score + "\nNS:" + ns_class + "\n-->";
+
+            document.querySelector('#result').textContent = nutriDataTxt;
+
+        }
+
+        function setListeners() {
+            document.querySelector('#addIngredient').addEventListener('click', addIngredient);
+            document.querySelector('#calculer').addEventListener('click', computeIngredients);
+
+        }
+
+        // FONCTION DE CALCUL DU NUTRISCORE 2022 PAR P.GAZANIOL
+        //https://sante.gouv.fr/IMG/pdf/maj__rapport_nutri-score_rapport__algorithme_2022_.pdf#page=130
+
+        function compute_FNS(energy = 0, sugar = 0, saturated_fats = 0, salt = 0, proteins = 0, fibers = 0, fruits_vegetables_percentage = 0, red_meat = false, cheese = false) {
+            var FNS_obj = {
+                FNS: {
+                    class: undefined,
+                    score: '',
+                    AScore: 0,
+                    CScore: 0
+                },
+                energy: {
+                    value: energy,
+                    score: undefined
+                },
+                sugar: {
+                    value: sugar,
+                    score: undefined
+                },
+                saturated_fats: {
+                    value: saturated_fats,
+                    score: undefined
+                },
+                salt: {
+                    value: salt,
+                    score: undefined
+                },
+                proteins: {
+                    value: proteins,
+                    score: undefined
+                },
+                fibers: {
+                    value: fibers,
+                    score: undefined
+                },
+                fruits_vegetables_percentage: {
+                    value: fruits_vegetables_percentage,
+                    score: undefined
+                },
+                red_meat: red_meat,
+                cheese: cheese
+            }
+
+            //energy
+            FNS_obj.energy.score = (Math.ceil(FNS_obj.energy.value / 335) - 1);
+
+            //sugar
+            if (FNS_obj.sugar.value <= 3.4) { FNS_obj.sugar.score = 0; } else
+                if (FNS_obj.sugar.value <= 6.8) { FNS_obj.sugar.score = 1; } else
+                    if (FNS_obj.sugar.value <= 10) { FNS_obj.sugar.score = 2; } else
+                        if (FNS_obj.sugar.value <= 14) { FNS_obj.sugar.score = 3; } else
+                            if (FNS_obj.sugar.value <= 17) { FNS_obj.sugar.score = 4; } else
+                                if (FNS_obj.sugar.value <= 20) { FNS_obj.sugar.score = 5; } else
+                                    if (FNS_obj.sugar.value <= 24) { FNS_obj.sugar.score = 6; } else
+                                        if (FNS_obj.sugar.value <= 27) { FNS_obj.sugar.score = 7; } else
+                                            if (FNS_obj.sugar.value <= 31) { FNS_obj.sugar.score = 8; } else
+                                                if (FNS_obj.sugar.value <= 34) { FNS_obj.sugar.score = 9; } else
+                                                    if (FNS_obj.sugar.value <= 37) { FNS_obj.sugar.score = 10; } else
+                                                        if (FNS_obj.sugar.value <= 41) { FNS_obj.sugar.score = 11; } else
+                                                            if (FNS_obj.sugar.value <= 44) { FNS_obj.sugar.score = 12; } else
+                                                                if (FNS_obj.sugar.value <= 48) { FNS_obj.sugar.score = 13; } else
+                                                                    if (FNS_obj.sugar.value <= 51) { FNS_obj.sugar.score = 14; } else
+                                                                        FNS_obj.sugar.score = 15;
+
+            //saturated_fats
+            FNS_obj.saturated_fats.score = (Math.max(Math.ceil(FNS_obj.saturated_fats.value) - 1), 0);
+
+            //salt
+            FNS_obj.salt.score = (Math.max((Math.ceil(FNS_obj.salt.value * 5) - 1), 0));
+
+            //proteins
+            if (FNS_obj.red_meat == true) {
+                if (FNS_obj.proteins.value <= 2.4) { FNS_obj.proteins.score = 0; } else
+                    if (FNS_obj.proteins.value <= 4.8) { FNS_obj.proteins.score = 1; } else
+                        FNS_obj.proteins.score = 2;
+            } else {
+                if (FNS_obj.proteins.value <= 2.4) { FNS_obj.proteins.score = 0; } else
+                    if (FNS_obj.proteins.value <= 4.8) { FNS_obj.proteins.score = 1; } else
+                        if (FNS_obj.proteins.value <= 7.2) { FNS_obj.proteins.score = 2; } else
+                            if (FNS_obj.proteins.value <= 9.6) { FNS_obj.proteins.score = 3; } else
+                                if (FNS_obj.proteins.value <= 12) { FNS_obj.proteins.score = 4; } else
+                                    if (FNS_obj.proteins.value <= 14) { FNS_obj.proteins.score = 5; } else
+                                        if (FNS_obj.proteins.value <= 17) { FNS_obj.proteins.score = 6; } else
+                                            FNS_obj.proteins.score = 7;
+            }
+
+            //fibers
+            if (FNS_obj.fibers.value <= 3) { FNS_obj.fibers.score = 0; } else
+                if (FNS_obj.fibers.value <= 4.1) { FNS_obj.fibers.score = 1; } else
+                    if (FNS_obj.fibers.value <= 5.2) { FNS_obj.fibers.score = 2; } else
+                        if (FNS_obj.fibers.value <= 6.3) { FNS_obj.fibers.score = 3; } else
+                            if (FNS_obj.fibers.value <= 7.4) { FNS_obj.fibers.score = 4; } else
+                                FNS_obj.fibers.score = 5;
+
+            //fruits_vegetables_percentage
+            if (FNS_obj.fruits_vegetables_percentage.value <= 40) { FNS_obj.fruits_vegetables_percentage.score = 0; } else
+                if (FNS_obj.fruits_vegetables_percentage.value <= 60) { FNS_obj.fruits_vegetables_percentage.score = 1; } else
+                    if (FNS_obj.fruits_vegetables_percentage.value <= 80) { FNS_obj.fruits_vegetables_percentage.score = 2; } else
+                        FNS_obj.fruits_vegetables_percentage.score = 5;
+
+            //AScore
+            FNS_obj.FNS.AScore = FNS_obj.energy.score + FNS_obj.sugar.score + FNS_obj.saturated_fats.score + FNS_obj.salt.score;
+
+            //CScore
+            if (FNS_obj.FNS.AScore < 11 || cheese == true) {
+                FNS_obj.FNS.CScore = FNS_obj.proteins.score + FNS_obj.fibers.score + FNS_obj.fruits_vegetables_percentage.score;
+                FNS_obj.FNS.score = FNS_obj.FNS.AScore - FNS_obj.FNS.CScore
+            } else {
+                FNS_obj.FNS.score = FNS_obj.FNS.AScore - FNS_obj.fibers.score - FNS_obj.fruits_vegetables_percentage.score;
+            }
+
+            if (FNS_obj.FNS.score <= 0) { FNS_obj.FNS.class = 'A'; } else
+                if (FNS_obj.FNS.score <= 2) { FNS_obj.FNS.class = 'B'; } else
+                    if (FNS_obj.FNS.score <= 10) { FNS_obj.FNS.class = 'C'; } else
+                        if (FNS_obj.FNS.score <= 18) { FNS_obj.FNS.class = 'D'; } else
+                            FNS_obj.FNS.class = 'E';
+
+            return (FNS_obj);
+        }
+
+        var aliments = {
+            'beurre ½ sel': {
+                energy: 2984,
+                fibers: 0,
+                fruits_vegetables_percentage: 0,
+                proteins: 0.8,
+                saturated_fats: 57,
+                salt: 2,
+                sugar: 0.6
+            },
+            'sucre': {
+                energy: 1700,
+                fibers: 0,
+                fruits_vegetables_percentage: 0,
+                proteins: 0,
+                saturated_fats: 0,
+                salt: 0,
+                sugar: 100
+            },
+            'oeuf': {
+                energy: 583,
+                fibers: 0,
+                fruits_vegetables_percentage: 0,
+                proteins: 13,
+                saturated_fats: 2.6,
+                salt: 0.31,
+                sugar: 0.3
+            },
+            'farine T55': {
+                energy: 1433,
+                fibers: 4,
+                fruits_vegetables_percentage: 0,
+                proteins: 11,
+                saturated_fats: 0.05,
+                salt: 0.05,
+                sugar: 0.25
+            },
+            'farine T110': {
+                energy: 1436,
+                fibers: 7.6,
+                fruits_vegetables_percentage: 0,
+                proteins: 10,
+                saturated_fats: 0.4,
+                salt: 0.1,
+                sugar: 1.8
+            },
+            'chocolat noir 52%': {
+                energy: 2139,
+                fibers: 8.5,
+                fruits_vegetables_percentage: 0,
+                proteins: 5.5,
+                saturated_fats: 18,
+                salt: 0,
+                sugar: 48
+            },
+            'sel': {
+                energy: 0,
+                fibers: 0,
+                fruits_vegetables_percentage: 0,
+                proteins: 0,
+                saturated_fats: 0,
+                salt: 40,
+                sugar: 0
+            },
+            'huile d\'olive (/100mL) ρ=0,9137': {
+                energy: 3367,
+                fibers: 0,
+                fruits_vegetables_percentage: 0,
+                proteins: 0,
+                saturated_fats: 13,
+                salt: 40,
+                sugar: 0
+            },
+            'levure boulangère': {
+                energy: 1480,
+                fibers: 23,
+                fruits_vegetables_percentage: 0,
+                proteins: 44.5,
+                saturated_fats: 1.5,
+                salt: 0.6,
+                sugar: 12
+            },
+            'banane': {
+                energy: 383,
+                fibers: 2.7,
+                fruits_vegetables_percentage: 100,
+                proteins: 1,
+                saturated_fats: 0.05,
+                salt: 3,
+                sugar: 15
+            },
+            'huile de colza (/100 mL) ρ = 0,916': {
+                energy: 3404,
+                fibers: 0,
+                fruits_vegetables_percentage: 0,
+                proteins: 0,
+                saturated_fats: 7,
+                salt: 0,
+                sugar: 0
+            },
+            'moutarde': {
+                energy: 619,
+                fibers: 2.1,
+                fruits_vegetables_percentage: 0,
+                proteins: 7.2,
+                saturated_fats: .8,
+                salt: 6.5,
+                sugar: 2.7
+            },
+            'carottes cuites': {
+                energy: 117,
+                fibers: 2,
+                fruits_vegetables_percentage: 100,
+                proteins: 0.8,
+                saturated_fats: 0,
+                salt: 0.2,
+                sugar: 3.8
+            },
+            'crème fraîche épaisse 15%MG': {
+                energy: 693,
+                fibers: 0,
+                fruits_vegetables_percentage: 0,
+                proteins: 2.9,
+                saturated_fats: 10,
+                salt: 0.08,
+                sugar: 5
+            },
+        };
+        document.addEventListener("DOMContentLoaded", function () {
+            setListeners();
+        });
+        init();
+    </script>
+</body>
+
+</html>
