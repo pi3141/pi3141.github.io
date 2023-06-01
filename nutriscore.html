@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <title>Calcul nutriscore</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
     <style>
         textarea {
             width: 200px;
@@ -11,13 +12,30 @@
         }
 
         fieldset {
-            border: none;
             display: flex;
             flex-direction: column;
         }
 
         fieldset div {
             padding: 5px;
+        }
+
+        #calculer {
+            background: rgb(23, 216, 97);
+        }
+
+        #addIngredient {
+            background-color: rgb(94, 94, 221);
+        }
+
+        label {
+            display: flex;
+            justify-content: flex-start;
+            align-items: baseline;
+        }
+
+        #spacer {
+            width: 2ch;
         }
     </style>
 </head>
@@ -26,9 +44,14 @@
     <label>Masse après cuisson (g) <input type="text" id='masse_pf'></input></label>
     <br>
     <fieldset id="ingredients">
+        <legend>Ingrédients (masse en g sauf si précisé)</legend>
     </fieldset>
-    <select id="ingredients_select"></select>
-    <input id='addIngredient' type="button" value="+">
+    <fieldset id="ingredients">
+        <legend>Ajouter un ingrédient</legend>
+
+        <select id="ingredients_select"></select>
+        <input id='addIngredient' type="button" value="+">
+    </fieldset>
     <br>
     <input type="button" id='calculer' value="calculer">
     <div id="nutriscore"></div>
@@ -64,8 +87,8 @@
             let label = document.createElement('div');
             let ingredient = document.querySelector('#ingredients_select').value;
             label.textContent = ingredient;
-            label.innerHTML = "<label>" + ingredient + " <input class='masse_ingredient' id=\"" + ingredient + "\"></input></label>";
-            document.querySelector('fieldset#ingredients').append(label);
+            label.innerHTML = "<label>" + ingredient + "<div id=\"spacer\"></div> <input class='masse_ingredient' id=\"" + ingredient + "\"></input></label>";
+            document.querySelector('fieldset#ingredients').appendChild(label);
         }
 
         function computeIngredients() {
