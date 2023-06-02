@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<title>tableau virtuel</title>
+<style>
+[contenteditable]:focus {
+  outline: 0px solid transparent;
+}
+body{
+  color:#333;
+  background-color:#eee;
+  font-family:'noto serif',serif;
+  font-size:2em;
+  line-height:1.15;
+  overflow : hidden;
+  caret-color:#4CAF50;
+}
+* { box-sizing: border-box; }
+  ul,ol {
+  margin:.5em 0 0 0 ;
+}
+nav{
+  position: absolute;
+  right: -50px;
+  display:grid;
+  top :0;
+  transition: all .25s ease-out;
+  width:60px;
+  transition-delay:3s;
+}
+nav:hover{
+  right:0px;
+  transition: all .5s ease-out;
+}
+button{
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 8px 14px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  transition:.2s
+}
+button:hover{
+  opacity:.5;
+}
+h1{
+  font-size:3rem;
+}
+h2{
+  font-size:2.2rem;
+}
+#notif{
+height: 100%;
+background-color: #4caf50;
+color: white;
+padding: 8px 14px;
+opacity: 0;
+z-index: -1;
+transition: 1s;
+transition-timing-function: ease-out;
+width: 100%;
+top: 0;
+position: absolute;
+text-align: center;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: xxx-large;
+}
+</style>
+</head>
+<body>
+<nav>
+<button title="gras (ctrl + b)" onclick="document.execCommand('bold');setFocus();">B</button>
+<button title="souligner (ctrl + u)" onclick="document.execCommand('underline');setFocus();">U</button>
+<button title="numérotation (F12)" onclick="document.execCommand('insertOrderedList');setFocus();">ol</button>
+<button title="puces (ctrl + F12)" onclick="document.execCommand('insertUnorderedList');setFocus();">ul</button>
+<button title="ligne horizontale (ctrl + -)" onclick="document.execCommand('insertHorizontalRule');setFocus();">hr</button>
+<button title="indice (alt + b)" onclick="document.execCommand('subscript');setFocus();">sub</button>
+<button title="exposant (alt + p)" onclick="document.execCommand('superscript');setFocus();">sup</button>
+<button title="titre 1 (ctrl + 1)" onclick="document.execCommand('heading','','H1');setFocus();">H1</button>
+<button title="titre 2 (ctrl + 2)" onclick="document.execCommand('heading','','H2');setFocus();">H2</button>
+<button title="indenter (tab)" onclick="document.execCommand('indent');setFocus();">⇥</button>
+<button title="désindenter (shift + tab)" onclick="document.execCommand('outdent');setFocus();">⇤</button>
+<button title="sauvegarder" onclick="save();setFocus();">&#x2193;&#x20de;</button>
+<div style="height:20px"></div>
+<button id="tab1" title="tableau 1 (alt+F1)" onclick="showBoard(1);">①</button>
+<button id="tab2" title="tableau 2 (alt+F2)" onclick="showBoard(2);">②</button>
+<button id="tab3" title="tableau 3 (alt+F3)" onclick="showBoard(3);">③</button>
+</nav>
+
+<div id="main1" class="board" contenteditable class="editable"></div>
+<div id="main2" class="board" contenteditable class="editable"></div>
+<div id="main3" class="board" contenteditable class="editable"></div>
+<div id="notif">sauvé</div>
+
+<script>
+var activeBoard;
+showBoard(1);
+
+function showBoard(aBoard){
+  activeBoard=aBoard;
+  let i = 0;
+  while(i < 3){
+    i++;
+    if (i == aBoard){
+    document.getElementById('main'+i).style.display="block";
+	document.getElementById('tab'+i).style.backgroundColor="#444";
+    }else{
+    document.getElementById('main'+i).style.display="none";
+	document.getElementById('tab'+i).style.backgroundColor="#4CAF50";
+    }
+  }
+  setFocus();
+}
+function setFocus(){
+	var el = document.getElementById('main'+activeBoard);
+	el.focus();
+}
+
+document.addEventListener('keydown', function(e){
+console.log(e.which);
+//bold
+if (e.ctrlKey && e.which === 66){
+    e.preventDefault(e);
+    document.execCommand('bold');
+    setFocus();
+}
+//underline
+if (e.ctrlKey && e.which === 85){
+    e.preventDefault(e);
+    document.execCommand('underline');
+    setFocus();
+}
+//orderedlist
+if (!e.shiftkey && e.which === 123){
+    e.preventDefault(e);
+    document.execCommand('insertOrderedList');
+    setFocus();
+}
+//unorderedlist
+if (e.shiftKey && e.which === 123){
+    e.preventDefault(e);
+    document.execCommand('insertUnorderedList');
+    setFocus();
+}
+//hr
+if (e.ctrlKey && e.which === 109){
+    e.preventDefault(e);
+    document.execCommand('insertHorizontalRule');
+    setFocus();
+}
+//subscript
+if (e.altKey && e.which === 66){
+    e.preventDefault(e);
+    document.execCommand('subscript');
+    setFocus();
+}
+//superscript
+if (e.altKey && e.which === 80){
+    e.preventDefault(e);
+    document.execCommand('superscript');
+    setFocus();
+}
+//h1
+if (e.altKey && e.which === 97){
+    e.preventDefault(e);
+    document.execCommand('heading','','H1');
+    setFocus();
+}
+//h2
+if (e.altKey && e.which === 98){
+    e.preventDefault(e);
+    document.execCommand('heading','','H2');
+    setFocus();
+}
+//tab
+if (!e.shiftKey && e.which === 9){
+    e.preventDefault(e);
+    document.execCommand('indent');
+    setFocus();
+}
+//shift tab
+if (e.shiftKey && e.which === 9){
+    e.preventDefault(e);
+    document.execCommand('outdent');
+    setFocus();
+}
+//alt+f1
+if (e.altKey && e.which === 112){
+    e.preventDefault(e);
+    showBoard(1);
+    setFocus();
+}
+//alt+f2
+if (e.altKey && e.which === 113){
+    e.preventDefault(e);
+    showBoard(2);
+    setFocus();
+}
+//alt+f3
+if (e.altKey && e.which === 114){
+    e.preventDefault(e);
+    showBoard(3);
+    setFocus();
+}
+//f3
+if (!e.altKey && e.which === 114){
+  e.preventDefault(e);
+  history.back(); 
+}
+
+
+});
+
+function save(){ // store the new content in localStorage when the button is clicked
+  var el = document.getElementsByClassName('board');
+  var notif = document.getElementById('notif');
+  localStorage.boards1 = el[0].innerHTML;
+  localStorage.boards2 = el[1].innerHTML;
+  localStorage.boards3 = el[2].innerHTML;
+  notif.style.opacity = .7;
+  notif.style.zIndex = 99 ;
+  notif.textContent = "sauvé";
+  setTimeout(function() { notif.style.opacity = "0"; notif.style.zIndex = -1 ; }, 1000);
+}
+
+if(localStorage.getItem('boards1') || localStorage.getItem('boards2') || localStorage.getItem('boards3') ) { // apply the newContent when it exists in localStorage
+  var el = document.getElementsByClassName('board');
+  el[0].innerHTML = localStorage.getItem('boards1');
+  el[1].innerHTML = localStorage.getItem('boards2');
+  el[2].innerHTML = localStorage.getItem('boards3');
+  notif.textContent = "chargé";
+  notif.style.opacity = .7;
+  notif.style.zIndex = 99 ;
+  setTimeout(function() { notif.style.opacity = "0"; notif.style.zIndex = -1 ; }, 1000);
+  console.log('saved boards find');
+}else{
+  console.log('no saved boards find');
+
+}
+
+setFocus();
+
+</script>
+
+</body>
+</html>
