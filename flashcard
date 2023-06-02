@@ -1,0 +1,33 @@
+<!doctype html>
+
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>FlashCard</title>
+  <meta name="description" content="Une appli de flashCard pour mes collégiens.">
+  <meta name="author" content="P.Gazaniol">
+
+  <meta property="og:title" content="FlashCard">
+  <meta property="og:type" content="website">
+ 
+<meta property="og:description" content="Une appli de flashCard pour mes collégiens.">
+
+<style>
+#main{
+  max-width:960px;
+  display:flex;
+  flex-direction:columns;
+}
+</style>
+</head>
+<body>
+  <div id='main'>
+    <div id='cardFrame'></div> 
+    <div id='feedbackFrame'></div>
+ </div>
+<script>
+</script>
+</body>
+</html>
