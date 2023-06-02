@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<script>
+
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const CHAP = urlParams.get('CHAP');
+const BAREME = urlParams.get('BAREME');
+const TIMERDURATION = urlParams.get('TIMERDURATION');
+QUESTIONSG=urlParams.get('QUESTIONSG')
+QUESTIONSD=urlParams.get('QUESTIONSD')
+
+TITLE="Interro chap. " + CHAP
+
+</script>
+
+<meta charset="utf-8"/>
+<style>
+    :root{
+  --h: 206;
+  --s: 100%;
+  --l: 57%;
+  --lLight : calc(var(--l) + 20%);
+  --bg: #EEE;
+  --secondColor: #444;
+}
+
+html{width: 100%;height: 100%;margin:0;}
+body{height: 100%;margin: 0;font-family:"Source Sans Pro",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue","Liberation Sans",sans-serif;}
+math{font-family:"Source Sans Pro",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue","Liberation Sans",sans-serif;}
+#feuille{max-width:100vw;max-height: 100vh;margin:auto;display:block}
+div[class^="slide-"], div[class*=" slide-"] {
+    width:100%;padding:0;margin:0;background: var(--bg); min-height: 100%; position: absolute;top: 0;
+}
+div[class^="slide-"]:not(.slide-1), div[class*=" slide-"]:not(.slide-1) {display:none;}
+.row {display: flex;}
+.column {flex: 50%;padding:10px;max-height: 100vh;border-right:solid thin black;}
+.icon {width: 135px;color: white;padding: 15%;}
+.item{display:flex;border-radius: 10px;background: hsl(var(--h),var(--s),var(--lLight));max-width: 75%;box-shadow: 1px 1px 2px black;font-size: xx-large;line-height: 1.5;padding: 0;margin-top:30px;align-self: center;}
+.iconDiv{border-radius: 10px 0 0 10px;padding: 0;display:flex;background-color: hsl(var(--h),var(--s),var(--l));}
+.textDiv{padding:10px;}
+h2{font-size:60px;text-align: center;margin-top: 0;margin-bottom: 0;background: hsl(var(--h),var(--s),var(--l));color:white;width: max-content;padding: 0 20px;}
+.timerBar{position: absolute;width: 100%;height: 15px;background: var(--secondColor);transition: width 1s linear;right: 0;}
+.questions{margin: 0 0 0 1ch;}
+ol > li::marker {font-weight: bold;color:var(--secondColor)}
+</style>
+</head>
+<body>
+<div class="slide-4" style="height:100%;background-color: hsl(var(--h),var(--s),var(--l));">
+    <div style="display:flex;justify-content: center;align-items: center;height:100%;">
+        <h2>Fin</h2>
+    </div>
+</div>
+<div class="slide-3 withTimer">
+    <div class="row">
+        <div class="column">
+            <div class="dynamicText">
+                <h2>À gauche de la table</h2>
+                <ol class="questions" id="questionsG">
+                </ol>
+            </div>
+        </div>
+        <div class="column">
+            <div class="dynamicText">
+                <h2 style="margin-left:auto;">À droite de la table</h2>
+                <ol class="questions" id="questionsD">
+                </ol>
+            </div>
+        </div>
+    </div> 
+</div>
+<div class="slide-2">
+    <div style="display:flex;flex-direction: column;margin: auto;">
+        <div class="item">
+            <div class="iconDiv"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.137 13.678"><path fill="currentColor" d="M2.46 12.313h5.634c.136.121.28.235.433.341a1.156 1.156 0 0 1-.229.024H2.46A1.48 1.48 0 0 1 1 11.218V2.46A1.478 1.478 0 0 1 2.46 1h3.192c.304 0 .563.106.776.32l3.01 3.01c.213.213.32.471.32.775v.434a.428.428 0 0 0-.137.023 1.2 1.2 0 0 0-.228.068v-.616H6.656a.827.827 0 0 1-.638-.273.826.826 0 0 1-.274-.639V1.365H2.46a1.195 1.195 0 0 0-.776.319 1.192 1.192 0 0 0-.32.776v8.758c.016.304.122.563.32.776.213.197.471.303.776.319zm6.774-7.664a.262.262 0 0 1-.046-.069l-3.01-3.01c-.016 0-.031-.007-.046-.023-.015 0-.023-.007-.023-.022v2.577c.03.335.212.517.547.547zm3.216 3.696c.06.09.06.181 0 .272l-1.824 1.825a.228.228 0 0 1-.275 0L9.256 9.348a.23.23 0 0 1 0-.274.228.228 0 0 1 .274 0l.959.98 1.687-1.71a.228.228 0 0 1 .274 0zM7.57 9.393c.03-.927.349-1.702.958-2.326.623-.608 1.399-.928 2.326-.958.928.03 1.703.35 2.326.958.609.624.928 1.399.958 2.326-.03.928-.35 1.703-.958 2.326-.623.609-1.398.928-2.326.959-.927-.03-1.703-.35-2.326-.959-.609-.623-.928-1.398-.958-2.326Zm3.284 2.92c.82-.016 1.512-.297 2.075-.844.548-.563.83-1.255.845-2.076-.016-.821-.297-1.513-.845-2.075-.563-.547-1.255-.829-2.075-.845-.822.016-1.513.298-2.075.845-.548.562-.83 1.254-.845 2.075.016.821.297 1.513.845 2.076.562.547 1.253.828 2.075.844zm0 0"/></svg></div>
+            <div class="textDiv">Utiliser une feuille de classeur (pas de feuille de cahier déchirées ou de demi feuille)</div>
+        </div>
+        <div class="item">
+            <div class="iconDiv"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13.125 12.035"><path fill="currentColor" d="M1.543 1.184c.015-.107.076-.168.182-.184h.731c.106.016.167.077.182.184v3.649h.912c.107.014.168.075.182.182-.014.106-.075.167-.182.182H1.36c-.106-.015-.167-.076-.181-.182.014-.107.075-.168.182-.182h.911V1.366h-.547c-.106-.015-.167-.076-.182-.182zm1.619 6.18a.786.786 0 0 0-.57-.297.95.95 0 0 0-.616.182l-.501.457c-.092.061-.175.054-.251-.022-.062-.091-.054-.175.023-.25l.502-.436a1.11 1.11 0 0 1 .866-.296c.319.03.593.168.821.412.213.243.312.517.296.82 0 .304-.106.57-.32.799L1.589 10.67h2.144c.107.015.168.076.183.182-.015.107-.076.168-.183.182H1.18c-.076 0-.13-.038-.16-.113-.031-.076-.024-.137.022-.183l2.1-2.257a.798.798 0 0 0 .227-.547.74.74 0 0 0-.206-.57zm8.781-5.269c.107.016.168.077.182.183-.014.107-.075.167-.182.182H5.374c-.106-.015-.167-.075-.182-.182.015-.106.076-.167.182-.183zm0 3.65c.107.015.168.076.182.182-.014.107-.075.167-.182.182H5.374c-.106-.015-.167-.075-.182-.182.015-.106.076-.167.182-.183zm0 3.648c.107.016.168.077.182.184-.014.106-.075.167-.182.182H5.374c-.106-.015-.167-.076-.182-.182.015-.107.076-.168.182-.184zm0 0"/></svg></div>
+            <div class="textDiv">Répondre succintement sans rédaction ni justification (sauf si c'est demandé).</div>
+        </div>
+        <div class="item">
+            <div class="iconDiv"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16.587 13.678"><path fill="currentColor" d="M8.27 2.072c1.02.016 1.94.213 2.76.592.822.396 1.475.921 1.962 1.575a3.81 3.81 0 0 1 .752 2.213 3.852 3.852 0 0 1-.662 2.097l.274.229a3.93 3.93 0 0 0 .776-2.305 4.123 4.123 0 0 0-.797-2.394c-.518-.7-1.218-1.262-2.1-1.688-.867-.41-1.84-.623-2.919-.638-1.095.015-2.083.235-2.965.66l.296.23a6.56 6.56 0 0 1 2.624-.571zm0 8.758a6.694 6.694 0 0 1-2.325-.41l-.184-.069-.16.114c-.242.198-.585.41-1.026.639-.426.227-.943.372-1.55.433.183-.213.373-.494.57-.844.213-.35.38-.737.502-1.163l.045-.205-.159-.137c-.776-.79-1.172-1.703-1.187-2.736 0-.563.129-1.096.388-1.597l-.296-.23a3.779 3.779 0 0 0-.457 1.827c.031 1.14.465 2.135 1.301 2.986-.167.594-.41 1.095-.73 1.506-.305.425-.48.653-.524.684-.046.045-.054.106-.023.183.03.076.083.114.159.114.76-.016 1.414-.153 1.961-.411.547-.26.966-.51 1.254-.753.746.289 1.56.433 2.442.433.852 0 1.635-.136 2.35-.41l-.32-.274a6.118 6.118 0 0 1-2.03.32zm7.23 1.528L1.29 1.045A.156.156 0 0 0 1.178 1a.155.155 0 0 0-.137.069c-.06.091-.053.175.023.25l14.21 11.313c.03.03.068.046.114.046a.153.153 0 0 0 .137-.069c.09-.091.083-.175-.024-.25zm0 0"/></svg></div>
+            <div class="textDiv">Une parole ou un regard sur la feuille du voisin donneront lieu à un avertissement puis seront sanctionné de 2 points en moins.</div>
+        </div>
+    </div>   
+</div>
+<div class="slide-1">              
+    <svg id="feuille" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 751 426.1">
+    <g fill="none">
+        <path stroke="#8be5e8" stroke-width=".3" d="M4.85 37.87h743.49M4.85 44.96h743.49M4.85 52.04h743.49M4.85 66.22h743.49M4.85 73.3h743.49M4.85 80.4h743.49M4.85 94.56h743.49M4.85 101.65h743.49M4.85 108.74h743.49M4.85 122.9h743.49M4.85 130h743.49M4.85 137.08h743.49M4.85 151.26h743.49M4.85 158.34h743.49M4.85 165.43h743.49M4.85 179.6h743.49M4.85 186.7h743.49M4.85 193.78h743.49M4.85 207.95h743.49M4.85 215.04h743.49M4.85 222.12h743.49M4.85 236.3h743.49M4.85 243.4h743.49M4.85 250.46h743.49M4.85 264.64h743.49M4.85 271.73h743.49M4.85 278.8h743.49M4.85 293h743.49M4.85 300.07h743.49m-743.49 7.1h743.49M4.85 321.32h743.49m-743.49 7.1h743.49M4.85 335.5h743.49M4.85 349.68h743.49M4.85 356.77h743.49M4.85 363.85h743.49M4.85 378.03h743.49M4.85 385.1h743.49M4.85 392.2h743.49M4.85 406.36h743.49m-743.49 7.1h743.49M4.85 420.54h743.49M4.85 434.72h743.49M4.85 441.81h743.49M4.85 448.89h743.49M4.85 463.07h743.49M4.85 470.15h743.49m-743.49 7.1h743.49M4.85 491.4h743.49M4.85 498.5h743.49M4.85 505.58h743.49M4.85 519.76h743.49M4.85 526.85h743.49M4.85 533.93h743.49M4.85 548.11h743.49M4.85 555.19h743.49M4.85 562.3h743.49M4.85 576.44h743.49m-743.49 7.1h743.49M4.85 590.62h743.49M4.85 604.8h743.49M4.85 611.9h743.49M4.85 618.97h743.49M4.85 633.15h743.49M4.85 640.23h743.49m-743.49 7.1h743.49M4.85 661.48h743.49M4.85 668.6h743.49M4.85 675.66h743.49M4.85 689.84h743.49M4.85 696.93h743.49M4.85 704h743.49M4.85 718.2h743.49M4.85 725.27h743.49M4.85 732.36h743.49M4.85 746.53h743.49M4.85 753.62h743.49M4.85 760.71h743.49M4.85 774.88h743.49M4.85 781.97h743.49M4.85 789.05h743.49M4.85 803.23h743.49M4.85 810.3h743.49M4.85 817.4h743.49M4.85 831.57h743.49M4.85 838.66h743.49M4.85 845.75h743.49M4.85 859.92h743.49M4.85 867.01h743.49M4.85 874.09h743.49M4.85 888.27h743.49M4.85 895.35h743.49M4.85 902.44h743.49M4.85 916.61h743.49M4.85 923.7h743.49M4.85 930.79h743.49M4.85 944.96h743.49M4.85 952.05h743.49M4.85 959.13h743.49M4.85 973.31h743.49M4.85 980.39h743.49M4.85 987.48h743.49"/>
+        <path stroke="#f81414" d="M118.24-57.77v1052.4"/>
+        <path stroke="#450a77" stroke-width=".5" d="M146.59-57.79V994.56M174.93-57.7V994.57M203.28-57.7V994.57M231.63-57.7V994.57m28.34-1052.3v1052.3M288.32-57.7V994.56M316.67-57.69V994.56M345-57.77V994.56M373.36-57.77V994.56M401.71-57.69V994.56M430.05-57.77V994.56M458.4-57.74v1052.3m28.35-1052.3v1052.3m28.34-1052.3v1052.3m28.35-1052.3v1052.3m28.35-1052.3v1052.3M600.13-57.73v1052.3M628.48-57.75v1052.3m28.34-1052.3v1052.3M685.17-57.73v1052.3m28.35-1052.3v1052.3m28.34-1052.3v1052.3"/>
+        <path stroke="#450a77" stroke-width=".49" d="M765.35 88.58H0m765.35 28.35H0m765.35 28.35H0m765.35 28.34H0m765.35 28.35H0m765.35 28.34H0m765.35 28.35H0m765.35 28.35H0m765.35 28.34H0m765.35 28.35H0m765.35 28.35H0m765.35 28.34H0m765.35 28.35H0m765.35 28.35H0m765.35 28.34H0m765.35 28.35H0m765.35 28.35H0m765.35 28.34H0m765.35 28.35H0m765.35 28.35H0m765.35 28.34H0m765.35 28.35H0m765.35 28.34H0m765.35 28.35H0m765.35 28.35H0m765.35 28.34H0m765.35 28.35H0m765.35 28.35H0m765.35 28.34H0m765.35 28.35H0m765.35 28.35H0m765.35 28.34H0m765.35 28.35H0m765.35 28.35H0m765.35 28.34H0" transform="matrix(.97356 0 0 1 4.84 -57.8)"/>
+    </g>
+    <path fill="gray" stroke="#000" stroke-width="1.5" d="M242.62 149.06h301v72.66h-301z"/>
+    <text xml:space="preserve" x="3.78" y="86.47" transform="translate(4.84 -57.74)" word-spacing="0"><tspan x="3.78" y="87.5" font-size="25" style="line-height:1.25;">Nom Prénom</tspan></text>
+    <text xml:space="preserve" x="53.2" y="105.23" transform="translate(4.84 -57.74)" word-spacing="0"><tspan x="53.2" y="105.23" font-size="40" style="line-height:1.25"> </tspan></text>
+    <text xml:space="preserve" x="6.33" y="115.12" transform="translate(4.84 -57.74)" word-spacing="0"><tspan x="3.78" y="116.12" font-size="25" style="line-height:1.25;">Classe</tspan></text>
+    <text xml:space="preserve" x="273.71" y="143.66" transform="translate(4.84 -57.74)" word-spacing="0"><tspan x="273.71" y="143.66" font-size="35" font-weight="700" style="line-height:1.25;">Interrogations</tspan></text>
+    <text xml:space="preserve" x=".59" y="200.05" transform="translate(4.84 -57)" word-spacing="0"><tspan x=".59" y="200.05" font-size="25" style="line-height:1.25;">G / D</tspan></text>
+    <text xml:space="preserve" x="1.89" y="227.95" transform="translate(4.84 -56)" word-spacing="0"><tspan x="1.89" y="227.95" font-size="25"  id="dateField" style="line-height:1.25;"></tspan></text>
+    <text xml:space="preserve" x="1.89" y="255.84" transform="translate(4.84 -55.5)" word-spacing="0"><tspan x="1.89" y="255.84" font-size="25" id="chapNr" style="line-height:1.25;"></tspan></text>
+    <path fill="none" stroke="#000" stroke-width="2.5" d="M.06 115.66h755.18"/>
+    <text xml:space="preserve" x="1.89" y="285.79" transform="translate(4.84 -57.3)" word-spacing="0"><tspan x="1.89" y="285.79" font-size="25" id="bareme" style="line-height:1.25;"></tspan></text>
+    <text xml:space="preserve" x="125.48" y="200.97" transform="translate(4.84 -57.74)" word-spacing="0"><tspan x="125.48" y="200.97" font-size="25" style="line-height:1.05999994;"> </tspan></text>
+    <text xml:space="preserve" x="261.78" y="256.44" transform="translate(4.84 -57.74)" word-spacing="0"><tspan x="261.78" y="256.44" font-size="40" style="line-height:1.25"><tspan x="261.78" y="256.44" font-size="45">Répondre ici</tspan></tspan></text>
+    </svg>
+</div>
+
+<script>
+window.onload = init;
+
+function init() {
+slideNr=1;
+document.addEventListener('keydown', processKeyPress);
+document.addEventListener('click', nextSlide);
+document.addEventListener('contextmenu', function(e){e.preventDefault();previousSlide();});
+window.addEventListener('resize', adaptTextSize);
+interval='';
+document.getElementById('questionsD').innerHTML=QUESTIONSD;
+document.getElementById('questionsG').innerHTML=QUESTIONSG;
+document.getElementById('chapNr').innerHTML="Chap. "+CHAP;
+document.getElementById('bareme').innerHTML="Note :   / "+ BAREME;
+document.title = TITLE;
+
+var today = new Date();
+var date = today.getDate().toString().padStart(2, '0')+'/'+(today.getMonth()+1).toString().padStart(2, '0')+ '/' + today.getFullYear().toString().substring(2);
+document.getElementById('dateField').textContent = date;
+}
+
+function processKeyPress(e) {
+console.log(e.code);
+  switch(e.code) {
+    case 'ArrowUp':
+    case 'ArrowRight':
+    case 'Space':
+        nextSlide();
+        break;
+    case 'ArrowLeft':
+    case 'ArrowDown':
+        previousSlide();
+        break;
+  }
+}
+
+function nextSlide(){
+    if(document.querySelector('.slide-'+ (slideNr+1) )){
+        document.querySelector('.slide-'+slideNr).style.display = 'none';
+        theNextSlide =  document.querySelector('.slide-'+(slideNr+1));
+        theNextSlide.style.display = 'block';
+        if(theNextSlide.classList.contains('withTimer')){
+            startTimer();
+        }else{
+            destroyTimer();
+        }
+        slideNr++;
+        adaptTextSize();
+    }else{
+        console.log('fin');
+    }
+}
+
+function startTimer(){
+    var timerBar = document.createElement('div');
+    timerBar.id='timerBar';
+    timerBar.classList.add('timerBar');
+    document.body.appendChild(timerBar);
+    timeLeft=TIMERDURATION;
+    interval = setInterval(function() {
+    timeLeft--;
+    timerBar.style.width= (timeLeft / TIMERDURATION * 100)+'%';
+    if (timeLeft < 0){clearInterval(interval);stopTimer();}
+    }, 1000);
+}
+
+function stopTimer(){
+    nextSlide();
+}
+
+function previousSlide(){
+    if(slideNr > 1){
+        document.querySelector('.slide-'+slideNr).style.display = 'none';
+        thePreviousSlide =  document.querySelector('.slide-'+(slideNr-1));
+        thePreviousSlide.style.display = 'block';
+        if(thePreviousSlide.classList.contains('withTimer')){
+            startTimer();
+            adaptTextSize();
+        }else{
+            destroyTimer();
+        }
+        slideNr--;
+    }else{
+        console.log('début');
+    }   
+}
+
+function destroyTimer() {
+    if (document.getElementById('timerBar')){
+        document.getElementById('timerBar').remove();
+        clearInterval(interval);
+    }
+}
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function adaptTextSize() {
+    if (slideNr != 3){return;};
+    content=document.getElementsByClassName("dynamicText");
+    content[0].style.fontSize = '54pt';
+    content[1].style.fontSize = '54pt';
+    while(document.documentElement.scrollHeight > document.documentElement.offsetHeight || content[0].style.fontSize > 0)
+    {
+        content[0].style.fontSize = parseInt(content[0].style.fontSize) - 2 + 'pt';
+        content[1].style.fontSize = content[0].style.fontSize;
+    }
+}
+
+
+//set main color
+//document.documentElement.style.setProperty('--h', h);
+//document.documentElement.style.setProperty('--s', s+'%');
+//document.documentElement.style.setProperty('--l', l+'%');
+</script>
+</body>
+</html>
