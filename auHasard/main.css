@@ -1,0 +1,97 @@
+button:not([disabled]){
+	background: #f9c412;
+	color: #181818;
+
+}
+
+body{
+background:#181818;
+color:#eee;
+font-size:1.2rem;
+font-family: 'Source sans pro', Tahoma, Geneva, sans-serif;
+}
+
+button{
+  cursor: pointer;
+display: inline-block;
+padding: .75em 1.5em;
+text-align: center;
+margin: 5px;
+border-radius:.3em;
+max-width:100%;
+overflow:visible; 
+font-size:20px;
+border:none;
+opacity:.8;
+transition : all .2s;
+}
+
+button[disabled] {
+	background: #e6e6e6;
+	color: #404040;
+	cursor: not-allowed;
+}
+
+#namesInput{
+  border:solid 1px gray;
+  border-radius:5px;
+  padding:5px;
+  margin: 5px;
+  min-height:15ch;
+}
+
+#namesInput:empty:before {
+  content:attr(data-placeholder);
+  color:gray
+}
+
+.winner{
+font-size: 100px !important;
+text-shadow: 2px 2px 2px #ba9005;
+}
+
+.winner::before{
+  content:'❱ ';
+  color:#ba9005;
+}
+
+.winner::after{
+  content:' ❰';
+  color:#ba9005;
+}
+
+#container{
+  margin: auto;
+}
+
+#nameDisplay{
+  font-size: 60px;
+  text-align: center;
+  transition: font-size 2s,text-shadow 2s;
+  white-space: nowrap;
+  position: absolute;
+ top: 50%;
+ left: 50%;
+ transform: translate(-50%, -50%);
+}
+
+#controls{
+  position: fixed;
+  bottom: 0;
+}
+
+button#pick{
+  background:#4CAF50;
+  color:white;
+}
+
+button#kick{
+  background: #aa624c;
+  color: white;
+}
+
+button:hover {
+  box-shadow: 0 0 0 2px white;
+  opacity:1
+}
+
