@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+        <style>
+            .boite{fill:none; stroke-width:.1px; stroke:#33f;}
+            .moustache{stroke-width:.1px; stroke:#33f;}
+            .moustacheEnd{stroke-width:.05px; stroke:#33f;}
+            .moyenne{stroke-width:.05px; stroke:#33f;}
+            .graduationTexte{text-anchor: middle}
+            .graduation{stroke:#ccc;}
+            .dot{fill:#33f;opacity: .5;}
+            .labelLine{stroke:#999;stroke-width: .05px;stroke-dasharray:.1px;}
+            .label{background: gray;fill: #33f;stroke-width: .05px;  filter: drop-shadow(.04px .04px .03px rgba(0, 0, 0, 0.8));}
+            .labelText{font-size: .3px;text-anchor: middle;fill:white;}
+            .colouredArea{fill-opacity: .2;stroke: none;}
+            .red{fill:#f00;}
+            .blue{fill:#00f;}
+            .yellow{fill:#ff0;}
+            .green{fill:#0f0;}
+            #data{border:solid thin gray;font-size:small;width:100%;height: 80vh;}
+            #inputs{width:100%;height: 100%;}
+            h1{font-size: medium;font-family: open sans;font-weight: normal;text-align: center;padding-top: 0;margin-top: 0;}
+            #saveButtons{position: absolute;right: 0;top:0;}
+            #btn5,#btn4,#btn3{display: none;}
+            #saveButtons input{font-size: xx-small}
+        </style>
+		<meta charset="utf-8"/>
+		<title></title>
+	</head>
+	<body>
+        <div id="saveButtons">
+            <input type="button" id="btn5" value="5" onclick="lsIO(5)">
+            <input  id="btn4" type="button" value="4" onclick="lsIO(4)">
+            <input  id="btn3" type="button" value="3" onclick="lsIO(3)">
+            <input  id="btnDEL" type="button" value="DEL" onclick="clearLS(3)">
+        </div>
+        <div id="inputs">
+            <input id="titleInput" type="text" placeholder="titre" required></input>
+            <textarea id="data" contenteditable="true" placeholder="data"></textarea>
+            <input id="bareme" type="text" value="20" required></input>
+            <button id="validate" onclick="getData()">
+              ✓
+            </button>
+        </div>
+        <div id="title"></div>
+        <div id="plot"></div>
+        <script>var isPlotted=!1;function init(){localStorage.getItem("content_5")&&(document.getElementById("btn5").style.display="revert"),localStorage.getItem("content_4")&&(document.getElementById("btn4").style.display="revert"),localStorage.getItem("content_3")&&(document.getElementById("btn3").style.display="revert")}function clearLS(){localStorage.clear(),document.getElementById("btn5").style.display="none",document.getElementById("btn4").style.display="none",document.getElementById("btn3").style.display="none"}function getData(){isPlotted=!0,document.getElementById("btn5").style.display="revert",document.getElementById("btn4").style.display="revert",document.getElementById("btn3").style.display="revert";for(var e,t=document.getElementById("bareme").value,l=document.getElementById("data").value,n=document.getElementById("titleInput").value,s=[],a=l.split("\n"),i=0;i<a.length;i++)a[i].includes("\xe9l\xe8ves")||a[i].includes("Moyenne")||""==a[i]?e=a[i].split("	").indexOf("Notes"):(strVal=a[i].split("	"),console.log(strVal[0]+" − "+strVal[e]),-1!=e&&(val=parseInt(strVal[e].replace(",","."),10)),isNaN(val)||s.push(val));document.getElementById("inputs").style.display="none",document.getElementById("saveButtons").style.display="revert",draw(s,t,n)}init();const asc=e=>e.sort((e,t)=>e-t),quantile=(e,t)=>{let l=asc(e),n=(l.length-1)*t,s=Math.floor(n),a=n-s;return void 0!==l[s+1]?l[s]+a*(l[s+1]-l[s]):l[s]},roundToTenth=e=>Math.round(10*e)/10;function draw(e,t,l){q1=quantile(e,.25),q2=quantile(e,.5),q3=quantile(e,.75),q1Norm=quantile(e,.25)/t*10,q2Norm=quantile(e,.5)/t*10,q3Norm=quantile(e,.75)/t*10,minVal=Math.min(...e),maxVal=Math.max(...e),minValNorm=Math.min(...e)/t*10,maxValNorm=Math.max(...e)/t*10,iQNorm=q3Norm-q1Norm;for(let n=0;n<=t;n++){let s=n/t*10;a+="<line class='graduation' x1='"+s+"' y1='0' x2='"+s+"' y2='5'/>",a+="<text class='graduationTexte' x='"+s+"' y='4.8' font-size='.2'>"+n+"</text>"}var a,i,d="<defs><filter id='shadow'><feDropShadow dx='4' dy='8' stdDeviation='4'/></filter></defs><filter x='0' y='0' width='1' height='1' id='solid'><feFlood flood-color='#33f' result='bg' /><feMerge><feMergeNode in='bg'/><feMergeNode in='SourceGraphic'/></feMerge></filter>";d+="<path d='M "+minValNorm+" 0 v 5 H "+q1Norm+" v -5 H 0'  class='colouredArea red' />",d+="<path d='M "+q1Norm+" 0 v 5 H "+q2Norm+" v -5 H 0'  class='colouredArea yellow' />",d+="<path d='M "+q2Norm+" 0 v 5 H "+q3Norm+" v -5 H 0'  class='colouredArea blue' />",d+="<path d='M "+q3Norm+" 0 v 5 H "+maxValNorm+" v -5 H 0'  class='colouredArea green' />",d+="<g id='axis' style='stroke:rgb(50,50,50);stroke-width:.02'><line x1='0' y1='4' x2='10' y2='4'/>"+a+"</g>";var o=1,y=e=>3-.3*e;asc(e).forEach(function(e){let l=e/t*10;i==e?(d+="<circle class='dot' cx='"+l+"' cy='"+y(o)+"' r='.07'/>",o+=.5):(o=.5,d+="<circle class='dot' cx='"+l+"' cy='3' r='.07'/>",i=e)}),d+="<line class='labelLine' x1='"+maxValNorm+"' y1='3' x2='"+maxValNorm+"' y2='1' />",d+="<path class='label' d='M "+maxValNorm+" 1.2 l 0.2 -0.1 h 0.2 v -1 h -.8 v 1 h .2 z' />",d+="<text class='labelText' x='"+maxValNorm+"' y='.4'><tspan font-size='.15px'>MAX</tspan><tspan x='"+maxValNorm+"' dy=.45px>"+roundToTenth(maxVal)+"</tspan></text>",d+="<line class='labelLine' x1='"+q3Norm+"' y1='3' x2='"+q3Norm+"' y2='1' />",d+="<path class='label' d='M "+q3Norm+" 1.2 l 0.2 -0.1 h 0.2 v -1 h -.8 v 1 h .2 z' />",d+="<text class='labelText' x='"+q3Norm+"' y='.4'><tspan font-size='.15px' >Q3</tspan><tspan x='"+q3Norm+"' dy=.45px>"+roundToTenth(q3)+"</tspan></text>",d+="<line class='labelLine' x1='"+q2Norm+"' y1='3' x2='"+q2Norm+"' y2='1' />",d+="<path class='label' d='M "+q2Norm+" 1.2 l 0.2 -0.1 h 0.25 v -1 h -.9 v 1 h .25 z' />",d+="<text class='labelText' x='"+q2Norm+"' y='.4'><tspan font-size='.15px' >M\xc9DIANE</tspan><tspan x='"+q2Norm+"' dy=.45px>"+roundToTenth(q2)+"</tspan></text>",d+="<line class='labelLine' x1='"+q1Norm+"' y1='3' x2='"+q1Norm+"' y2='1' />",d+="<path class='label' d='M "+q1Norm+" 1.2 l 0.2 -0.1 h 0.2 v -1 h -.8 v 1 h .2 z' />",d+="<text class='labelText' x='"+q1Norm+"' y='.4'><tspan font-size='.15px' >Q1</tspan><tspan x='"+q1Norm+"' dy=.45px>"+roundToTenth(q1)+"</tspan></text>",d+="<line class='labelLine' x1='"+minValNorm+"' y1='3' x2='"+minValNorm+"' y2='1' />",d+="<path class='label' d='M "+minValNorm+" 1.2 l 0.2 -0.1 h 0.2 v -1 h -.8 v 1 h .2 z' />",d+="<text class='labelText' x='"+minValNorm+"' y='.4'><tspan font-size='.15px' >MIN</tspan><tspan x='"+minValNorm+"' dy=.45px>"+roundToTenth(minVal)+"</tspan></text>",d+="<rect class='boite' x='"+q1Norm+"' y='3.5' width='"+iQNorm+"' height='1' />",d+="<line class='moyenne' x1='"+q2Norm+"' y1='3.5' x2='"+q2Norm+"' y2='4.5' />",d+="<line class='moustache' x1='"+minValNorm+"' y1='4' x2='"+q1Norm+"' y2='4' />",d+="<line class='moustacheEnd' x1='"+minValNorm+"' y1='3.5' x2='"+minValNorm+"' y2='4.5' />",d+="<line class='moustache' x1='"+maxValNorm+"' y1='4' x2='"+q3Norm+"' y2='4' />",d+="<line class='moustacheEnd' x1='"+maxValNorm+"' y1='3.5' x2='"+maxValNorm+"' y2='4.5' />";var r=document.createElementNS("http://www.w3.org/2000/svg","svg");r.setAttribute("width","100%"),r.setAttribute("viewBox","-1 0 12 5"),r.setAttributeNS("http://www.w3.org/2000/xmlns/","xmlns:xlink","http://www.w3.org/1999/xlink"),r.innerHTML=d,document.getElementById("plot").appendChild(r),document.getElementById("title").innerHTML="<h1>"+l+"</h1>"}function lsIO(e){!0==isPlotted?(htmlPage=document.body.innerHTML,localStorage.setItem("content_"+e,htmlPage)):document.body.innerHTML=localStorage["content_"+e],document.getElementById("saveButtons").style.display="none"}</script>
+	</body>
+</html>
