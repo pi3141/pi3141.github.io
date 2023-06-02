@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Questionnaire</title>
+
+    <!-- Bootstrap -->
+    <link href="../webqcm/css/bootstrap.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	<style>
+.grad{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	width: auto;
+	height: auto;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.65))); /* Chrome,Safari4+ */
+	z-index: -1;
+	opacity: 0.7;
+}
+.form-control{
+	font-size: 1.2cm;
+	height: 2cm;
+	margin: auto;
+	width: 100%;
+}
+.btn{
+	height: 2cm;
+	font-size: 1.2cm;
+	width: 100%;
+}
+h1{
+	font-size: 1.2cm;
+	margin: .2em;
+}
+select option[default] {
+    color: #ccc;
+}
+
+	</style>
+  </head>
+  <body style="background-image: url(chimie.jpg);background-size:cover;background-repeat:no-repeat;background-position: center top">
+<img src="../webqcm/chimie.jpg" style="z-index: -1;min-height: 100%;width: 100%;height: auto;position: fixed;top: 0; left: 0;" /> 
+
+		<div class="grad"></div>
+		<div style="max-width: 95%;margin:auto">
+			<div style="margin-right:auto;max-width:12cm;padding: 10px;background-color: rgba(10,10,0,0.3);margin-top: 10px;border-radius: 10px;box-shadow: 6px 6px 6px black;">
+			<h1 style="text-align: center;font-size: 1.5cm;font-weight: 800;text-shadow: 3px 3px 3px gray">QUIZ</h1>
+			<form action="../webqcm/quiz.php" method="post" style="margin: auto">		
+				<div id="myForm" class="form-group">
+					<input type="text" required class="form-control" placeholder="nom" name="user">
+					<input type="text" required class="form-control" placeholder="prénom" name="prenom">
+
+					<select name="classe" required id="class" class="form-control">
+							<option value="" default disabled selected>classe</option>	
+					</select>
+					<input type="hidden" name="referer" value="" />
+					<input type="hidden" name="fp" value="" />
+
+				</div>
+				<div class="form-group">
+					<input type="submit" class="btn btn-primary" disable="disabled" value="Démarrer" />
+				</div>
+			</form>
+		</div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+$.getJSON('questions.json',function(data){
+		quiz = data.quizData;
+		//window.alert(quiz[0].class);
+		console.log('json loaded successfully');
+		}).error(function(){
+		console.log('error: json not loaded');
+		}).done(function(){
+		init();
+		});
+
+function init(){
+  //					<input type="hidden" id="dossierQ" name="dossierQ" value="" />
+  var url;
+url =  String(document.location).slice(0,-1) ;
+dossierQuestions = url.substr(url.lastIndexOf('/') + 1);
+
+var nodeParent = document.getElementById("myForm");
+var input = document.createElement("INPUT");
+input.type = "hidden";
+input.name = "dossierQ";
+input.value = dossierQuestions;
+nodeParent.appendChild(input) ;
+
+
+	for (i=0; i<quiz[0].class.length; i++){
+		$(document.createElement('option')).text(quiz[0].class[i]).attr('value', quiz[0].class[i]).appendTo('#class');
+	}
+$(document.getElementsByName("referer")).attr('value', document.referer);
+//function to toggle select font color, to have a correct behaviour for the placeholder
+$(document).on('change','select', function() {
+	myFunction()
+});
+$(document).ready(myFunction);
+function myFunction(){
+var el = $('select');
+el.toggleClass('default', !el.val());
+}
+
+}
+</script>
+
+
+
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+  </body>
+</html>

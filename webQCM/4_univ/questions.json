@@ -1,0 +1,135 @@
+﻿{			"quizData":    
+		[
+		{
+			"quizTitle"		:	"Notre Univers et sa mesure",
+            "class"   	    :   ["4e1","4e3","4e6"]
+        },
+		{
+            "question"      :   "Qu'est-ce que le big-bang ?",
+            "image"         :   "",
+            "choices"       :   [
+                                    "Le début de l'Univers",
+                                    "Une expansion rapide et intense de l'Univers",
+                                    "L'apparition de la vie",
+                                    "La création du Soleil"
+                                ],
+            "correct"       :   "Une expansion rapide et intense de l'Univers",
+            "explanation"   :   "Le big-bang est le moment où l'Univers était dans un état dense et chaud. Il s'est ensuite rapidement étendu. On ne sait pas s'il s'agit du début de l'Univers."
+        },
+        {
+            "question"      :   "Que représente cette image ?",
+            "image"         :   "img1.jpg",
+            "choices"       :   [
+                                    "La Voie Lactée",
+                                    "Le système solaire",
+                                    "Le groupe locale",
+                                    "Un superamas"
+                                ],
+            "correct"       :   "La Voie Lactée",
+            "explanation"   :   "La Voie Lactée est notre galaxie."
+        },
+        {
+            "question"      :   "Parmi ces structures, quelle est la plus petite ?",
+            "image"         :   "",
+            "choices"       :   [
+                                    "Galaxie",
+                                    "Amas",
+                                    "Groupe local",
+                                    "Système Solaire"
+                                ],
+            "correct"       :   "Système Solaire",
+            "explanation"   :   "Le système Solaire est la plus petite structure ici. Il est contenu dans la galaxie, qui est lui même contenu dans le groupe local."
+        },
+		{
+            "question"      :   "L'année-lumière est une mesure de …",
+            "image"         :   "",
+            "choices"       :   [
+                                    "Distance",
+                                    "Vitesse",
+                                    "Temps"
+                                ],
+            "correct"       :   "Distance",
+            "explanation"   :   "L'année lumière est une unité de distance. C'est la distance que parcours la lumière en une année."
+        },
+		{
+            "question"      :   "500 mm = … m",
+            "image"         :   "",
+            "choices"       :   [
+                                    "50 m",
+									"5 m",
+                                    "0,5 m",
+                                    "0,05 m"
+                                ],
+            "correct"       :   "0,5 m",
+            "explanation"   :   "Pour faire le calcul rapidement on peut se rappeler qu'un milimètre est un millième de mètre. Il faut donc mille millimètres pour obtenir un mètre. Donc 500 mm, c'est la moitié d'un mètre."
+        },
+		{
+            "question"      :   "12,8056 km = … m",
+            "image"         :   "",
+            "choices"       :   [
+                                    "0,128056 m",
+									"1,28056 m",
+									"128,056 m",
+									"1280,56 m",
+                                    "12805,6 m"
+                                ],
+            "correct"       :   "12805,6 m",
+            "explanation"   :   "Pour faire le calcul rapidement on peut se rappeler qu'un kilomètre vaut mille mètres."
+        },
+		{
+            "question"      :   "54,6 nm = … µm",
+            "image"         :   "",
+            "choices"       :   [
+                                    "54,6 µm",
+									"5,46 µm",
+									"546 µm",
+									"5460 µm",
+									"54600 µm",
+									"546000 µm",
+									"0,546 µm",
+									"0,0546 µm"								
+                                ],
+            "correct"       :   "0,0546 µm",
+            "explanation"   :   "Pour faire le calcul rapidement on peut se rappeler qu'un micromètre et mille fois plus grand qu'un nanomètre."
+		},	
+		{
+			"question"      :   "0,6 Mm = … km",
+            "image"         :   "",
+            "choices"       :   [
+                                    "0,0006 km",
+									"0,000000006 km",
+									"60 km",
+									"600 km",
+									"6000 km"								
+                                ],
+            "correct"       :   "600 km",
+            "explanation"   :   "Pour faire le calcul rapidement on peut se rappeler qu'un megamètre (Mm) et mille fois plus grand qu'un kilomètre (km)."
+        },
+		{
+            "question"      :   "12 Gm = … Mm",
+            "image"         :   "",
+            "choices"       :   [
+                                    "0,012 Mm",
+									"0,12 Mm",
+									"120 Mm",
+									"1200 Mm",
+									"12 000 Mm",
+									"120 000 Mm"								
+                                ],
+            "correct"       :   "12 000 Mm",
+            "explanation"   :   "Pour faire le calcul rapidement on peut se rappeler qu'un gigamètre(Gm) et mille fois plus grand qu'un mégamètre."
+		},	
+		{
+			"question"      :   "Parmi ces unités, quelle est la plus grande ?",
+            "image"         :   "",
+            "choices"       :   [
+                                    "année-lumière (a.l.)",
+									"megamètre (Mm)",
+									"unité astronomique (ua)"
+                                ],
+            "correct"       :   "année-lumière (a.l.)",
+            "explanation"   :   "Une année lumière vaut 9 461 milliards de km, soit 9 millions de Mm. L'unité astronomique vaut 150 Mm."
+        }
+    
+	]
+}

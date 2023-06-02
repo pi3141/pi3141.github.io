@@ -1,0 +1,280 @@
+﻿{			"quizData":    
+		[
+		{
+			"quizTitle"		:	"Atomes, ions et molécules",
+            "class"   	    :   ["4e1","4e3","4e6"]
+        },
+		{
+            "question"      :   "Combien y a-t-il de molécules dans cette image ?",
+            "image"         :   "1.png",
+            "choices"       :   [
+                                    "0",
+                                    "1",
+                                    "2",
+                                    "3",
+                                    "6",
+                                    "7",
+                                    "8",
+                                    "on ne peut pas les compter"
+                                ],
+            "correct"       :   "2",
+            "explanation"   :   "Il y a deux molécules qui contiennent 3 et 4 atomes."
+        },
+        {
+            "question"      :   "Cette équation est-elle équilibrée ?",
+            "image"         :   "eq1.svg",
+            "choices"       :   [
+                                    "oui",
+                                    "non"
+                                ],
+            "correct"       :   "oui",
+            "explanation"   :   "Lorsqu'on fait l'inventaire, on remarque que du côté des réactifs comme du côté des produits, il y a 1 atome de carbone, 4 atomes d'hydrogène, 4 atomes d'oxygène."
+        },
+        {
+            "question"      :   "Cette équation est-elle équilibrée ?",
+            "image"         :   "eq2.svg",
+            "choices"       :   [
+                                    "oui",
+                                    "non"
+                                ],
+            "correct"       :   "oui",
+            "explanation"   :   "Lorsqu'on fait l'inventaire, on remarque que du côté des réactifs comme du côté des produits, il y a 5 atome de carbone, 12 atomes d'hydrogène, 2 atomes d'oxygène."
+        },
+        {
+            "question"      :   "Quel atome est représentée par une sphère rouge ?",
+            "image"         :   "",
+            "choices"       :   [
+                                    "azote",
+                                    "carbone",
+				    "oxygène",
+				    "chlore",
+				    "hydrogène"
+                                ],
+            "correct"       :   "oxygène",
+            "explanation"   :   "L'atome d'oxygène est représenté par une sphère rouge."
+        },
+        {
+            "question"      :   "Quel atome est représentée par une sphère bleu ?",
+            "image"         :   "",
+            "choices"       :   [
+                                    "azote",
+                                    "carbone",
+				    "oxygène",
+				    "chlore",
+				    "hydrogène"
+                                ],
+            "correct"       :   "azote",
+            "explanation"   :   "L'atome d'azote est représenté par une sphère bleu."
+        },
+        {
+            "question"      :   "Quel atome est représentée par une sphère noire ?",
+            "image"         :   "",
+            "choices"       :   [
+                                    "azote",
+                                    "carbone",
+				    "oxygène",
+				    "chlore",
+				    "hydrogène"
+                                ],
+            "correct"       :   "carbone",
+            "explanation"   :   "L'atome de carbone est représenté par une sphère noire."
+        },
+        {
+            "question"      :   "Quel atome a pour symbole la lettre N ?",
+            "image"         :   "",
+            "choices"       :   [
+                                    "azote",
+                                    "carbone",
+				    "oxygène",
+				    "chlore",
+				    "hydrogène"
+                                ],
+            "correct"       :   "azote",
+            "explanation"   :   "L'atome d'azote a pour symbole la lettre N."
+        },  
+        {
+            "question"      :   "Quel atome a pour symbole la lettre C ?",
+            "image"         :   "",
+            "choices"       :   [
+                                    "azote",
+                                    "carbone",
+				    "oxygène",
+				    "chlore",
+				    "hydrogène"
+                                ],
+            "correct"       :   "carbone",
+            "explanation"   :   "L'atome de carbone a pour symbole la lettre C."
+        },  
+ {
+            "question"      :   "Cette équation est-elle équilibrée ?",
+            "image"         :   "eq3.svg",
+            "choices"       :   [
+                                    "oui",
+                                    "non"
+                                ],
+            "correct"       :   "non",
+            "explanation"   :   "Lorsqu'on fait l'inventaire, on remarque que du côté des réactifs il manque 2 atomes d'oxygène."
+        },
+        {
+            "question"      :   "Quel est le nom de cette molécule ?",
+            "image"         :   "2.png",
+            "choices"       :   [
+                                    "méthane",
+                                    "eau",
+				    "dioxyde de carbone",
+				    "chloroforme",
+				    "dihydrogène",
+				    "dioxygène de carbone",
+				    "diazote"
+                                ],
+            "correct"       :   "dioxyde de carbone",
+            "explanation"   :   "Il s'agit du dioxyde de carbone."
+        },
+        {
+            "question"      :   "Comment appelle-t-on les molécules à droite de la flèche dans une équation de réaction ?",
+            "image"         :   "",
+            "choices"       :   [
+                                    "les réactifs",
+                                    "les produits",
+                                    "le mélange",
+                                    "les substances"
+                                ],
+            "correct"       :   "les produits",
+            "explanation"   :   "Les réactifs sont à gauche de la flèche, les produits à droite."
+        },
+        {
+            "question"      :   "Dans le réaction suivante donner le nom d'un produit ?",
+            "image"         :   "eq1.svg",
+            "choices"       :   [
+                                    "méthane",
+                                    "eau",
+				    "dioxygène",
+				    "chloroforme",
+				    "dihydrogène",
+				    "dioxygène de carbone",
+				    "diazote"
+                                ],
+            "correct"       :   "eau",
+            "explanation"   :   "Les produits se trouvent à droite de la flèche."
+        },
+        {
+            "question"      :   "Dans la molécule C₉H₈O₄, combien y a-t-il d'atomes ?",
+            "image"         :   "",
+            "choices"       :   [
+                                    "3",
+                                    "1",
+				    "2",
+				    "8",
+				    "9",
+				    "21",
+				    "17",
+				    "25"
+                                ],
+            "correct"       :   "21",
+            "explanation"   :   "Il suffit de compter tous les atomes."
+        }, 
+        {
+            "question"      :   "Dans la molécule C₂₁H₃₀O₂, combien y a-t-il d'atomes ?",
+            "image"         :   "",
+            "choices"       :   [
+                                    "21",
+                                    "53",
+				    "52",
+				    "32",
+				    "2",
+				    "30",
+				    "76",
+				    "1 seul"
+                                ],
+            "correct"       :   "53",
+            "explanation"   :   "Il suffit de compter tous les atomes."
+        },  
+        {
+            "question"      :   "Quelle est la formule chimique pour décrire cela (tous les atomes sont visibles) :",
+            "image"         :   "4.png",
+            "choices"       :   [
+                                    "C₁₂H₂N₄",
+                                    "C₉H₇N₂O",
+				    "C₈H₈NO₂",
+				    "C₈H₇NO",
+				    "C₉H₈N₂O₂",
+				    "CO₄"
+                                ],
+            "correct"       :   "C₈H₈NO₂",
+            "explanation"   :   "Il suffit de compter les atomes."
+        }, 
+        {
+            "question"      :   "Dans la molécule C₉H₈O₄, combien y a-t-il d'atomes d'hydrogène ?",
+            "image"         :   "",
+            "choices"       :   [
+                                    "3",
+                                    "1",
+				    "2",
+				    "8",
+				    "9",
+				    "21",
+				    "17",
+				    "25"
+                                ],
+            "correct"       :   "8",
+            "explanation"   :   "Le nombre en indice fait référence au symbole écrit à gauche de celui-ci."
+        },  
+        {
+            "question"      :   "Dans la molécule C₂₁H₃₀O₂, combien y a-t-il d'atomes d'oxygène ?",
+            "image"         :   "",
+            "choices"       :   [
+                                    "21",
+                                    "53",
+				    "2",
+				    "32",
+				    "30",
+				    "76",
+				    "1 seul"
+                                ],
+            "correct"       :   "2",
+            "explanation"   :   "Il suffit de compter les atomes d'oxygène."
+        },  
+    {
+            "question"      :   "Donner la formule correspondant à cette molécule ?",
+            "image"         :   "3.png",
+            "choices"       :   [
+                                    "CH₄",
+                                    "CH₈",
+				    "C₂H₄",
+				    "C₄H₈",
+				    "H₄C₈",
+				    "2 CH₄",
+				    "2 CH₈"
+                                ],
+            "correct"       :   "2 CH₄",
+            "explanation"   :   "Il suffit de compter chaque sorte d'atome."
+        },  
+        {
+            "question"      :   "Que contient l'air que nous respirons (environ) ?",
+            "image"         :   "",
+            "choices"       :   [
+                                    "100% de dioxygène",
+                                    "100% d'oxygène",
+                                    "80% de dioxygène et 20% de diazote",
+                                    "20% de dioxygène et 80% de diazote",
+                                    "50% d'oxygène et 50% de diazote",
+                                    "30% de dioxyde de carbone et 70% d'oxygène",
+                                    "20% d'oxygène et 80% de diazote"
+                                ],
+            "correct"       :   "20% de dioxygène et 80% de diazote",
+            "explanation"   :   "L'air contient environ 4/5e de diazote et 1/5e de dioxygène."
+        },  
+        {
+            "question"      :   "Comment appelle-t-on les molécules à gauche de la flèche dans une équation de réaction ?",
+            "image"         :   "",
+            "choices"       :   [
+                                    "les réactifs",
+                                    "les produits",
+                                    "le mélange",
+                                    "les substances"
+                                ],
+            "correct"       :   "les réactifs",
+            "explanation"   :   "Les réactifs sont à gauche de la flèche, les produits à droite."
+        }
+	]
+}

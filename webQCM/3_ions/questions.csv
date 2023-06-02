@@ -1,0 +1,22 @@
+Atomes et ions
+3e1;3e2;3e4;3e5;3e6
+type;question;image;tip;r1;r2;r3;r4;r5;r6;r7;r8 Type : s, m or t.
+s;Quelle est la charge électrique d'un proton ?;;Un proton a toujours une charge positive (+).;+;−;0;2+;2-;ça dépend
+s;Quelle est la charge électrique d'un atome ?;;Un atome a toujours autant d'électron (−) que de protons (+), il a donc une charge neutre (0).;0;+;−;2+;2-;ça dépend
+s;Quelle est la charge électrique d'un neutron ?;;Un neutron a toujours une charge nulle (0).;0;+;−;2+;2-;ça dépend
+s;Quelle est la charge électrique d'un électron ?;;Un électron a toujours une charge négative (−).;−;+;0;2+;2-;ça dépend
+s;Quelle est la charge électrique d'un nucléon ?;;Un nucléon peut être un proton (+) ou un neutron (0).;ça dépend;+;−;0;2+;2-
+m;De quel type d'espèce s'agit-il ?;"img/ionna.png";Un anion est un ion qui a plus d'électrons que de protons. Un cation est un ion qui a plus de protons que d'électrons. Un atome a autant de protons que d'électrons.;un ion|un cation;un atome;un anion
+s;L'atome de Bismuth à pour numéro atomique Z = 83 et A = 209. Combien possède-t-il de neutrons ?;;Le nombre de neutron se calcule en faisant A - Z.;126;83;209;292;4
+s;L'atome de Bismuth à pour numéro atomique Z = 83 et A = 209. Combien possède-t-il de nucléons ?;;Le nombre A coresspond au nombre de nucléon.;209;126;83;292;4
+s;Quelle particule n'est pas un nucléon ?;;Les nucléons sont les particules du noyau. L'électron n'est pas dans le noyau.;électron;neutron;proton
+s;L'atome de Bismuth à pour numéro atomique Z = 83 et A = 209. Combien possède-t-il d'électrons ?;;Un atome est toujours neutre : il possède autant d'électrons que de protons.;83;126;209;292;4
+s;L'atome de Bismuth à pour numéro atomique Z = 83 et A = 209. Combien possède-t-il de protons ?;;Le numéro atomique Z est égale au nombre de protons;83;209;292;126;4
+s;De quel type d'espèce s'agit-il ?;img/acl.png;Un anion a plus d'électrons que de protons. Un cation a plus de protons que d'électrons. Un atome a autant de protons que d'électrons.;un atome;un anion;un cation
+s;L'atome de lithium à pour numéro atomique Z = 3 et A = 7. Combien possède-t-il d'électrons dans son noyau ?;;Il n'y a pas d'électrons dans le noyau (ceci est une question piège);0;1;2;3;4;7;10
+s;L'atome de Bismuth à pour numéro atomique Z = 83 et A = 209. L'ion bismuth a pour formule Bi³⁺. Combien possède-t-il d'électrons ?;;La charge de l'ion bismuth est 3+. Cela signifie que l'atome de bismuth a perdu 3 électrons. Il y en a donc 83 - 3 = 80.;80;86;209;126;83;84
+s;Quelle est la formule de l'espèce suivante ?;img/aal.png;C'est en comptant les électrons et les protons que l'on peut déterminer la charge totale de l'espèce.;Al;Al⁻;Al²⁻;Al⁺;Al²⁺;Al³⁺
+s;L'ion bismuth Bi³⁺ est-il …;;Un cation a toujours une charge +, un anion une charge −.;un cation;un anion;un atome
+s;De quel type d'espèce s'agit-il ?;img/ional.png;Un anion a plus d'électrons que de protons. Un cation a plus de protons que d'électrons. Un atome a autant de protons que d'électrons.;un cation;un anion;un atome
+s;Quelle est la formule de l'espèce suivante ?;img/ana.png;C'est en comptant les électrons et les protons que l'on peut déterminer la charge totale de l'espèce.;Na;Na⁻;Na²⁻;Na⁺;Na²⁺
+s;Quelle est la formule de l'espèce suivante ?;img/ioncl.png;C'est en comptant les électrons et les protons que l'on peut déterminer la charge totale de l'espèce.;Cl⁻;Cl;Cl²⁻;Cl⁺;Cl²⁺

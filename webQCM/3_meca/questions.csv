@@ -1,0 +1,17 @@
+Mécanique
+3e2;3e6;3e7;3e8
+type;question;image;tip;r1;r2;r3;r4;r5;r6;r7;r8
+m;Qu'elle est la force représentée par la flèche rouge ?;voiture.jpg;La flèche représente <strong>la force d'attraction de la Terre sur la camionnette</strong>. C'est cette force que l'on appelle <strong>le poids</strong>;le poids de la camionnette|la force de la Terre sur la camionnette;la force de la camionnette sur la Terre;la masse de la camionnette
+t;En quelle unité s'exprime la force ?;;Elle s'exprime en newton, de symbole N.;newton|n|en newton
+t;À l'aide de l'échelle, déterminer la force exercée par les gaz sur la fusée;fusee.jpg;La flèche est trois fois plus grande que le segment de 10 mega-newton (MN), on peut donc déterminer sa force. Ne pas oublier l'unité !;30MN|30 MN|30 mega-newton|30 meganewton
+t;Quel appareil permet de mesurer la force ?;;Le dynamomètre mesure la force en newton (N);dynamomètre|dynamometre|le dynamomètre|le dynamometre
+t;Sur Terre, on suspend un objet à un dynamomètre. On mesure 6 N. Quel est la masse de cet objet ?;;On se sert de la relation P = m × g, en sachant que sur Terre g vaut à peu près 10;0,6kg|0,6 kg|0.6kg|0.6 kg|600g|600 g
+t;Un objet à une masse de 2,8 kg. Quel est son poids ?;;On se sert de la relation P = m × g, en sachant que sur Terre g vaut à peu près 10. Ne pas oublier l'unité !;28N|28 N
+s;Quel est la relation liant le poids et la masse;;P = m × g, avec P en N, m en kg, et g en N/kg;P = m × g; P = m / g; P = g / m
+t;Deux objets interagissent avec la trousse. Le ressort et …;trousse.jpg;<strong>La Terre</strong> attire la trousse vers elle.;la terre|terre
+s;Quel est l'unité de la masse;;la masse s'exprime en kilogramme (kg);kg;N;km/h;N/kg
+s;Quel est l'unité du poids;;le poids s'exprime en newton (N);N;kg;km/h;N/kg
+s;Si deux astéroïdes se rapprochent l'un de l'autre, les forces de gravitations entre ces astéroïdes …;;Lorsque les objets se rapprochent, la force qui les attire augmente (comme pour des aimants);augmentent;diminuent
+s;Avec quel appareil mesure-t-on la masse;;La masse se mesure avec une balance.;une balance;un dynamomètre;un thermomètre
+s;Avec quel appareil mesure-t-on le poids;;Le poids se mesure avec un dynamomètre.;un dynamomètre;une balance;un thermomètre
+t;Deux astéroïdes de masse m₁ et m₂ sont séparés d'une distance d.Calculer la force d'attraction exercé par l'astéroïde 1 sur l'astéroïde 2<br><br>On donne :<br> G=6,67×10⁻¹¹<br>m₁=1 000 000 kg<br>m₂=20 000 000 kg<br>d=10m.;;On utilise la relation F = G × m₁ × m₂ / d². Ne pas oublier l'unité !;13,34N|13.34N|13,34 N|13.34 N|13 N|13N

@@ -1,0 +1,173 @@
+﻿{			"quizData":    
+		[
+		{
+			"quizTitle"		:	"Électricité",
+            "class"   	    :   ["4e1","4e3","4e6"]
+        },
+		{
+            "question"      :   "Quel est l'appareil permettant de mesurant une tension ?",
+            "image"         :   "",
+            "choices"       :   [
+                                    "voltmètre",
+                                    "tensiomètre",
+                                    "ampèremètre",
+                                    "wattmètre"
+                                ],
+            "correct"       :   "voltmètre",
+            "explanation"   :   "Le voltmètre mesure la tension."
+        },
+        {
+            "question"      :   "Quelle est l'unité du courant ?",
+            "image"         :   "",
+            "choices"       :   [
+                                    "l'ampère (A)",
+                                    "le watt (W)",
+									"le volt (V)",
+									"l'électricité (I)",
+									"la charge électrique (C)"
+                                ],
+            "correct"       :   "l'ampère (A)",
+            "explanation"   :   "L'ampère est l'unité du courant."
+        },
+        {
+            "question"      :   "Pour que le courant circule dans un circuit, il faut un générateur qui « pousse » les électrons et …",
+            "image"         :   "",
+            "choices"       :   [
+                                    "un voltmètre",
+                                    "une pile",
+									"un circuit fermé",
+									"au moins deux fils",
+									"une lampe",
+									"un moteur",
+									"un récepteur",
+									"un ampèremètre"
+                                ],
+            "correct"       :   "un circuit fermé",
+            "explanation"   :   "Pour que le courant électrique puisse circuler, il faut : un générateur qui « pousse » les électrons ET un circuit fermé ou l'électricité peut circuler."
+        },
+        {
+            "question"      :   "Qu'est-ce qu'un nœud ?",
+            "image"         :   "",
+            "choices"       :   [
+                                    "une portion du circuit située entre deux dipôles",
+                                    "un ensemble de parcours fermé",
+									"l'endroit par lequel rentre l'électricité dans un dipôle",
+									"un point du circuit où le courant a plusieurs chemin possible"
+                                ],
+            "correct"       :   "un point du circuit où le courant a plusieurs chemin possible",
+            "explanation"   :   "Un nœud est un point du circuit où le courant a plusieurs chemins possibles."
+        },
+        {
+            "question"      :   "Qu'est-ce que la branche principale ?",
+            "image"         :   "",
+            "choices"       :   [
+                                    "la branche la plus grande",
+                                    "la branche qui contient le générateur",
+									"la branche qui contient les récépteurs",
+									"la branche qui contient le moteur"
+                                ],
+            "correct"       :   "la branche qui contient le générateur",
+            "explanation"   :   "La branche principale est celle qui contient le générateur."
+        },
+        {
+            "question"      :   "Quels dipôles sont branchés en série ?",
+            "image"         :   "img1.jpg",
+            "choices"       :   [
+                                    "M et L",
+                                    "R et M",
+									"G et M",
+									"G et R",
+									"G et M"
+                                ],
+            "correct"       :   "G et R",
+            "explanation"   :   "G et R sont les seuls dipôles branchés en série."
+        },
+        {
+            "question"      :   "Quels dipôles sont branchés en dérivation ?",
+            "image"         :   "img2.jpg",
+            "choices"       :   [
+                                    "L1 et G",
+                                    "L1 et M",
+									"L2 et R",
+									"L2 et L1",
+									"L5 et G",
+									"aucun"
+                                ],
+            "correct"       :   "aucun",
+            "explanation"   :   "Aucun dipôle n'est branché en dérivation."
+        },
+        {
+            "question"      :   "Dans quel cas le voltmètre est-il correctement branché ?",
+            "image"         :   "img3.jpg",
+            "choices"       :   [
+                                    "A",
+                                    "B",
+									"C"
+                                ],
+            "correct"       :   "B",
+            "explanation"   :   "Le voltmètre doit être branché en dérivation. La borne COM orientée vers le pôle - du générateur."
+        },  
+        {
+            "question"      :   "Dans quel cas l'ampèremètre est-il correctement branché",
+            "image"         :   "img4.jpg",
+            "choices"       :   [
+                                    "A",
+                                    "B",
+									"C"
+                                ],
+            "correct"       :   "B",
+            "explanation"   :   "L'ampèremètre doit être branché en série. La borne COM orientée vers le pôle - du générateur."
+        },
+ {
+            "question"      :   "Que vaut le courant Im ?",
+            "image"         :   "i1.jpg",
+            "choices"       :   [
+                                    "0,5 A",
+                                    "250 mA",
+									"750 mA",
+									"325 mA",
+									"0 A"
+                                ],
+            "correct"       :   "250 mA",
+            "explanation"   :   "La loi des noeuds nous permet de trouver Im = 250 mA ou 0,25 A."
+        },
+        {
+            "question"      :   "Que vaut Im ?",
+            "image"         :   "i2.jpg",
+            "choices"       :   [
+                                    "33,5 mA",
+                                    "75 mA",
+									"0 mA",
+									"on ne peut pas savoir"
+                                ],
+            "correct"       :   "75 mA",
+            "explanation"   :   "Im = 75 mA, car dans une branche le courant est le même partout."
+        },
+        {
+            "question"      :   "Que vaut Idel ?",
+            "image"         :   "i3.jpg",
+            "choices"       :   [
+                                    "395,4 mA",
+                                    "144,4 mA",
+                                    "125,5 mA",
+                                    "269,9 mA",
+									"on ne peut pas savoir"
+                                ],
+            "correct"       :   "144,4 mA",
+            "explanation"   :   "En appliquant la loi des noeuds, on trouve Idel = 144,4 mA."
+        },
+        {
+            "question"      :   "Que vaut Il ?",
+            "image"         :   "i3.jpg",
+            "choices"       :   [
+                                    "395,4 mA",
+                                    "144,4 mA",
+                                    "125,5 mA",
+                                    "269,9 mA",
+									"on ne peut pas savoir"
+                                ],
+            "correct"       :   "125,5 mA",
+            "explanation"   :   "Il = 125,5 mA, car dans une même branche, le courant est le même partout."
+        }
+	]
+}

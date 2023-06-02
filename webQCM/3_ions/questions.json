@@ -1,0 +1,237 @@
+﻿{			"quizData":    
+		[
+		{
+			"quizTitle"		:	"Atomes et ions",
+            "class"   	    :   ["3e2","3e6","3e7","3e8"]
+        },
+		{
+            "question"      :   "Quelle est la charge électrique d'un proton ?",
+            "image"         :   "",
+            "choices"       :   [
+                                    "+",
+                                    "−",
+                                    "0",
+                                    "2+",
+                                    "2−",
+                                    "ça dépend"
+                                ],
+            "correct"       :   "+",
+            "explanation"   :   "Un proton a toujours une charge positive (+)."
+        },
+		{
+            "question"      :   "De quel type d'espèce s'agit-il ?",
+            "image"         :   "ionna.png",
+            "choices"       :   [
+                                    "un anion",
+                                    "un cation",
+									"un atome"
+                                ],
+            "correct"       :   "un cation",
+            "explanation"   :   "Un anion a plus d'électrons que de protons. Un cation a plus de protons que d'électrons. Un atome a autant de protons que d'électrons."
+        },
+        {
+            "question"      :   "Quelle est la charge électrique d'un neutron ?",
+            "image"         :   "",
+            "choices"       :   [
+									"+",
+                                    "−",
+                                    "0",
+                                    "2+",
+                                    "2−",
+                                    "ça dépend"
+                                ],
+            "correct"       :   "0",
+            "explanation"   :   "Un électron a toujours une charge nulle (0)."
+        },
+        {
+            "question"      :   "Quelle est la charge électrique d'un atome ?",
+            "image"         :   "",
+            "choices"       :   [
+									"+",
+                                    "−",
+                                    "0",
+                                    "2+",
+                                    "2−",
+                                    "ça dépend"
+                                ],
+            "correct"       :   "0",
+            "explanation"   :   "L'atome est toujours électriquement neutre."
+        },
+        {
+            "question"      :   "L'atome de Bismuth à pour numéro atomique Z = 83 et A = 209. Combien possède-t-il de protons ?",
+            "image"         :   "",
+            "choices"       :   [
+                                    "83",
+                                    "209",
+									"292",
+									"126",
+									"4"
+                                ],
+            "correct"       :   "83",
+            "explanation"   :   "Le numéro atomique Z est égale au nombre de protons"
+        },
+		{
+            "question"      :   "De quel type d'espèce s'agit-il ?",
+            "image"         :   "acl.png",
+            "choices"       :   [
+                                    "un anion",
+                                    "un cation",
+									"un atome"
+                                ],
+            "correct"       :   "un atome",
+            "explanation"   :   "Un anion a plus d'électrons que de protons. Un cation a plus de protons que d'électrons. Un atome a autant de protons que d'électrons."
+        }, 
+		{
+            "question"      :   "L'atome de Bismuth à pour numéro atomique Z = 83 et A = 209. Combien possède-t-il de neutrons ?",
+            "image"         :   "",
+            "choices"       :   [
+                                    "83",
+                                    "209",
+									"292",
+									"126",
+									"4"
+                                ],
+            "correct"       :   "126",
+            "explanation"   :   "Le nombre de neutron se calcule en faisant A - Z."
+        },
+        {
+            "question"      :   "Quelle particule n'est pas un nucléon ?",
+            "image"         :   "",
+            "choices"       :   [
+                                    "proton",
+                                    "électron",
+									"neutron"
+                                ],
+            "correct"       :   "électron",
+            "explanation"   :   "Les nucléons sont les particules du noyau. L'électron n'est pas dans le noyau."
+        },
+		{
+            "question"      :   "L'atome de lithium à pour numéro atomique Z = 3 et A = 7. Combien possède-t-il d'électrons dans son noyau ?",
+            "image"         :   "",
+            "choices"       :   [
+                                    "0",
+                                    "1",
+									"2",
+									"3",
+									"4",
+									"7",
+									"10"
+                                ],
+            "correct"       :   "0",
+            "explanation"   :   "Il n'y a pas d'électrons dans le noyau."
+		},
+		{
+            "question"      :   "L'atome de Bismuth à pour numéro atomique Z = 83 et A = 209. Combien possède-t-il d'électrons ?",
+            "image"         :   "",
+            "choices"       :   [
+                                    "83",
+                                    "209",
+									"292",
+									"126",
+									"4"
+                                ],
+            "correct"       :   "83",
+            "explanation"   :   "L'atome étant électriqument neutre le nombre d'électrons est égale au nombre de proton Z."
+        },
+        {
+            "question"      :   "Quelle est la charge électrique d'un électron ?",
+            "image"         :   "",
+            "choices"       :   [
+									"+",
+                                    "−",
+                                    "0",
+                                    "2+",
+                                    "2−",
+                                    "ça dépend"
+                                ],
+            "correct"       :   "−",
+            "explanation"   :   "Un électron a toujours une charge négative (−)."
+        },
+		{
+            "question"      :   "L'atome de Bismuth à pour numéro atomique Z = 83 et A = 209. L'ion bismuth a pour formule Bi³⁺. Combien possède-t-il d'électrons ?",
+            "image"         :   "",
+            "choices"       :   [
+                                    "83",
+                                    "209",
+									"80",
+									"126",
+									"86",
+									"84"
+                                ],
+            "correct"       :   "80",
+            "explanation"   :   "La charge de l'ion bismuth est 3+. Cela signifie que l'atome de bismuth a perdu 3 électrons. Il y en a donc 83 - 3 = 80."
+        },
+		{
+            "question"      :   "Donner la formule de l'espèce suivante ?",
+            "image"         :   "aal.png",
+            "choices"       :   [
+                                    "Al",
+                                    "Al⁻",
+									"Al⁺",
+									"Al²⁺",
+									"Al²⁻"
+                                ],
+            "correct"       :   "Al",
+            "explanation"   :   "C'est en comptant les électrons et les protons que l'on peut déterminer la charge totale de l'espèce."
+        }, 
+        {
+            "question"      :   "L'ion bismuth Bi³⁺ est-il …",
+            "image"         :   "",
+            "choices"       :   [
+                                    "un anion",
+                                    "un cation",
+									"un atome"
+                                ],
+            "correct"       :   "un cation",
+            "explanation"   :   "Un cation a toujours une charge +, un anion une charge −."
+        },  
+        {
+            "question"      :   "De quel type d'espèce s'agit-il ?",
+            "image"         :   "ional.png",
+            "choices"       :   [
+                                    "un anion",
+                                    "un cation",
+									"un atome"
+                                ],
+            "correct"       :   "un cation",
+            "explanation"   :   "Un anion a plus d'électrons que de protons. Un cation a plus de protons que d'électrons. Un atome a autant de protons que d'électrons."
+        },  
+		{
+            "question"      :   "Donner la formule de l'espèce suivante ?",
+            "image"         :   "ana.png",
+            "choices"       :   [
+                                    "Na",
+                                    "Na⁻",
+									"Na⁺",
+									"Na²⁺",
+									"Na²⁻"
+                                ],
+            "correct"       :   "Na",
+            "explanation"   :   "C'est en comptant les électrons et les protons que l'on peut déterminer la charge totale de l'espèce."
+        }, 
+		{
+            "question"      :   "Donner la formule de l'espèce suivante ?",
+            "image"         :   "ioncl.png",
+            "choices"       :   [
+                                    "Cl",
+                                    "Cl⁻",
+									"Cl⁺",
+									"Cl²⁺",
+									"Cl²⁻"
+                                ],
+            "correct"       :   "Cl⁻",
+            "explanation"   :   "C'est en comptant les électrons et les protons que l'on peut déterminer la charge totale de l'espèce."
+        }, 
+		{
+            "question"      :   "De quel type d'espèce s'agit-il ?",
+            "image"         :   "ional.png",
+            "choices"       :   [
+                                    "un anion",
+                                    "un cation",
+									"un atome"
+                                ],
+            "correct"       :   "un cation",
+            "explanation"   :   "Un anion a plus d'électrons que de protons. Un cation a plus de protons que d'électrons. Un atome a autant de protons que d'électrons."
+        }
+	]
+}

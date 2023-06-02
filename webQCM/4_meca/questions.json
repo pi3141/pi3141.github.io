@@ -1,0 +1,155 @@
+﻿{			"quizData":    
+		[
+		{
+			"quizTitle"		:	"Mécanique",
+            "class"   	    :   ["4e2","4e4","4e8"]
+        },
+		{
+            "question"      :   "Quelle est la bonne relation pour déterminer la vitesse ?",
+            "image"         :   "",
+            "choices"       :   [
+									"v = t × d",
+                                    "v = d / t",
+                                    "v = t / d"
+                                ],
+            "correct"       :   "v = d / t",
+            "explanation"   :   "Pour s'en rappeler, on peut se souvenir qu'une vitesse peut s'exprimer en km/h. C'est à dire une distance (km) divisée par un temps (t), donc la relation est v = d / t, p"
+        },
+        {
+            "question"      :   "Quelle est le mouvement de cette pièce ?",
+            "image"         :   "img1.jpg",
+            "choices"       :   [
+                                    "Circulaire non-uniforme",
+                                    "Circulaire uniforme",
+                                    "Rectiligne uniforme",
+                                    "Rectiligne non-uniforme",
+                                    "Curviligne uniforme",
+                                    "Curviligne non-uniforme"
+                                ],
+            "correct"       :   "Curviligne non-uniforme",
+            "explanation"   :   "Le mouvement est curviligne car la trajectoire est une courbe quelconque. Il est non-uniforme car le mouvement se ralentit au sommet de la courbe (les images sont plus proches)."
+        },
+        {
+            "question"      :   "Un train roule doucement le long du quai. Peach est assise dans un wagon et Bowser est sur le quai. Il regarde le train partir. Par rapport au quai Peach est :",
+            "image"         :   "",
+            "choices"       :   [
+                                    "immobile",
+                                    "en mouvement"
+                                ],
+            "correct"       :   "en mouvement",
+            "explanation"   :   "Assis sur le quai nous verrions Peach avancer."
+        },
+{
+            "question"      :   "Un train roule doucement le long du quai. Peach est assise dans un wagon et Bowser est sur le quai. Il regarde le train partir. Par rapport au quai Bowser est :",
+            "image"         :   "",
+            "choices"       :   [
+                                    "immobile",
+                                    "en mouvement"
+                                ],
+            "correct"       :   "immobile",
+            "explanation"   :   "Assis sur le quai, nous verrions Bowser immobile."
+        },
+		{
+            "question"      :   "Un train roule doucement le long du quai. Peach est assise dans un wagon et Bowser est sur le quai. Il regarde le train partir. Peach est-elle en mouvement par rapport au train ?",
+            "image"         :   "",
+            "choices"       :   [
+                                    "oui",
+									"non"
+                                ],
+            "correct"       :   "non",
+            "explanation"   :   "Assis dans le train nous verrions Peach immobile."
+        },
+		{
+            "question"      :   "Quelle est la bonne relation pour déterminer la distance ?",
+            "image"         :   "",
+            "choices"       :   [
+									"d = t / v",
+                                    "d = v / t",
+                                    "d = v × t"
+                                ],
+            "correct"       :   "d = v × t",
+            "explanation"   :   "À l'aide du produit en croix sur la relation : v = d / t, on peut retrouver d = v × t"
+        },		
+		{
+            "question"      :   "Quelle est la bonne relation pour déterminer la durée d'un trajet ?",
+            "image"         :   "",
+            "choices"       :   [
+									"t = v / d",
+                                    "t = d / v",
+                                    "t = v × d"
+                                ],
+            "correct"       :   "t = d / v",
+            "explanation"   :   "À l'aide du produit en croix sur la relation : v = d / t, on peut retrouver t = d / v."
+        },		
+		{
+            "question"      :   "Un nageur parcours 50 m en 20,26 s, quelle a été sa vitesse moyenne sur ce parcours ?",
+            "image"         :   "",
+            "choices"       :   [
+									"101,3 m/s",
+									"10,13 m/s",
+									"2,47 m/s",
+                                    "0,41 m/s",
+									"2,47 km/h",
+                                    "0,41 km/h",
+									"aucune ne convient"
+                                ],
+            "correct"       :   "2,47 m/s",
+            "explanation"   :   "Il faut utiliser la relation v = d / t. d est ici en mètres, t en secondes, donc v sera en m/s."
+        },
+		{
+            "question"      :   "Une voiture est allé de Lyon à Grenoble. Pour parcourir les 100 km, elle a mit 1h20. Quelle a été sa vitesse moyenne ?",
+            "image"         :   "",
+            "choices"       :   [
+                                    "83,33 km/h",
+									"0,012 km/h",
+									"75 km/h",
+									"75 m/s",
+									"aucune réponse ne convient"								
+                                ],
+            "correct"       :   "75 km/h",
+            "explanation"   :   "1h20, c'est une heure et 20 minutes. 20 minutes c'est 20/60 heures (car il y a 60 minutes dans une heure). 20/60 = 0,333. Donc 1h20 = 1,333h. On utilise ensuite la relation v = d / t, donc v = 100 / 1,333."
+		},	
+		{
+			"question"      :   "Dennis Kimetto detient le record du marathon en 2h03min. Sachant qu'il a parcouru l'épreuve à la vitesse moyenne de 20,59 km/h, retrouver la distance d'un marathon.",
+            "image"         :   "",
+            "choices"       :   [
+                                    "42,2 km",
+									"42,0 km",
+									"4200 m",
+									"24 km",
+									"240 km"								
+                                ],
+            "correct"       :   "42,2 km",
+            "explanation"   :   "2h03, c'est 2h et 3 minutes. 3 minutes c'est 3/60 h, soit 0,05h. Donc 2h03min c'est 2,05h. d = v × t, donc d = 20,59 × 2,05"
+        },
+		{
+            "question"      :   "Quel·s adjectif·s conviennent pour décrire le mouvement du coin de la télécabine représenté par la petite croix.",
+            "image"         :   "img2.png",
+            "choices"       :   [
+                                    "Circulaire non-uniforme",
+                                    "Circulaire uniforme",
+                                    "Rectiligne uniforme",
+                                    "Rectiligne non-uniforme",
+                                    "Curviligne uniforme",
+                                    "Curviligne non-uniforme"							
+                                ],
+            "correct"       :   "Rectiligne uniforme",
+            "explanation"   :   "Rectiligne car la trajectoire est une droite. L'écart entre les points et identiques, la valeur de la vitesse est donc constante, on dit que le mouvement est uniforme."
+		},	
+		{
+			"question"      :   "Quel·s adjectif·s conviennent pour décrire le mouvement de la Lune vu depuis le centre de la Terre ?",
+            "image"         :   "",
+            "choices"       :   [
+                                    "Circulaire non-uniforme",
+                                    "Circulaire uniforme",
+                                    "Rectiligne uniforme",
+                                    "Rectiligne non-uniforme",
+                                    "Curviligne uniforme",
+                                    "Curviligne non-uniforme"	
+                                ],
+            "correct"       :   "Circulaire uniforme",
+            "explanation"   :   "Circulaire, car la Lune tourne sur une orbite circulaire, et uniforme car sa vitesse et constante."
+        }
+    
+	]
+}
