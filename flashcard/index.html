@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>FlashCard</title>
+  <meta name="description" content="Une appli de flashCard pour mes collégiens." />
+  <meta name="author" content="P.Gazaniol" />
+  <meta property="og:title" content="FlashCard" />
+  <meta property="og:type" content="website" />
+  <meta property="og:description" content="Une appli de flashCard pour mes collégiens." />
+  <link href="https://fonts.cdnfonts.com/css/go" rel="stylesheet">
+  <link href="styles.css" rel="stylesheet">
+</head>
+
+<body>
+
+
+
+
+  <div id="topBar">
+    <nav role="navigation">
+    <div id="menuToggle">
+      <input type="checkbox" />
+      <span></span>
+      <span></span>
+      <span></span>
+
+      <ul id="menu">
+        <li><a href="#" id="choosePackage">Leçons</a></li>
+        <li><a href="#" id="export">Export</a></li>
+        <li><a href="#" id="import">Import</a></li>
+        <li><a href="#" id="raz">↺</a></li>
+        <li><a href="#" id="help">?</a></li>
+      </ul>
+    </div>
+  </nav>
+    <div id="stat"><span title='questions sues' style='color:green'>ø</span> − <span title='questions en cours d'
+        apprentissage' style='color:blue'>ø
+      </span> − <span title='questions non vues' style='color:gray'>ø</span><span
+        title='pourcentage de réponses correctes pour cette session'> [ -- %]</div>
+  </div>
+  <div id="content">
+    <div id="endMessage">Plus de cartes à mémoriser maintenant.<br>Repassez plus tard ou essayer d'autres leçons.</div>
+    <div id="packageSelectorDiv">
+      <fieldset id="packageSelector">
+        <legend>Quels paquets reviser ?</legend>
+      </fieldset>
+      <button id="validatePackage">Démarrer</button>
+    </div>
+    <div id="card">
+      <div class="side1">Question</div>
+      <div class="side2">Réponse</div>
+    </div>
+    <div class="cardButtons">
+      <div class="side1">
+        <button type="button" id="flip">Retourner</button>
+      </div>
+      <div class="side2">
+        <button type="button" data-grade="2" id="easy" class="feedbackButton">Facile</button>
+        <button type="button" data-grade="1" id="known" class="feedbackButton">Juste</button>
+        <button type="button" data-grade="0" id="unknown" class="feedbackButton">Faux</button>
+      </div>
+    </div>
+  </div>
+  <script src="cards.js"></script>
+  <script src="flashcards.js"></script>
+</body>
+
+</html>
