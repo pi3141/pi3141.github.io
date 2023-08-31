@@ -15,7 +15,8 @@
         <script>
             function valider(){
                 var param=document.getElementById('data').value.replace(/(?:\r|\n|\r\n)/g, '|');
-                document.getElementById('lien').innerHTML="memo.html?q="+param;
+		if (param.lenght) > 1998){alert("Limite de 2000 caractères dépassée, le lien ne fonctionnera peut être pas dans tous les navigateurs…")}
+                document.getElementById('lien').innerHTML="<a href=\"https://pi3141.github.io/onlineFC/memo.html?q="+param+\">https://pi3141.github.io/onlineFC/memo.html?q="+param+</a>;
 		document.getElementById('copy').disabled = false;
             }
 	    function copy(){
