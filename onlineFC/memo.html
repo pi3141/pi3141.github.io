@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fiche de mémorisation</title>
+  <style media="screen">
+    .cache {
+      cursor: pointer;
+      border: dashed 1px transparent;
+      transition: .3s;
+    }
+
+    .c {
+      border: dashed 1px black;
+    }
+
+    .h {
+      opacity: 0;
+    }
+
+    .hide {
+      transition: .3s;
+    }
+
+    ul {
+      text-align: left;
+      padding-left: 0;
+    }
+
+    body {
+      background-color: #fafafa;
+      text-rendering: optimizeLegibility;
+      color: #444;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: large;
+      line-height: 1.5;
+      caret-color: transparent;
+      margin: auto;
+    }
+
+    h2 {
+      margin: 20px auto;
+      max-width: 600px;
+    }
+
+    h2 span {
+      padding: 3px 5px;
+      font-weight: normal;
+    }
+
+    svg {
+      display: block;
+      margin: auto;
+    }
+
+    div.header {
+      text-align: center;
+      background-color: #009879;
+      color: #ffffff;
+    }
+
+    div.mémo {
+      display: grid;
+      grid-template-columns: auto;
+      margin: auto;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+      border-bottom: thin solid #ccc;
+      max-width: 40rem;
+    }
+
+    div.cell {
+      padding: 12px 15px;
+      user-select: none;
+    }
+
+    .mémo>div:nth-of-type(even) {
+      background-color: #f3f3f3;
+    }
+
+    .mémo>div:last-of-type {
+      border-bottom: 2px solid #009879;
+    }
+
+    div.mémo {
+      columns: 2;
+      column-gap: 2px;
+    }
+
+    div.row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+    }
+
+    div.headerRow {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    button {
+      background-color: #009879;
+      color: #fafafa;
+      padding: 0 20px;
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      height: 40px;
+      border: none;
+      cursor: pointer;
+      border: solid thin #fafafa;
+      ;
+    }
+
+    button:hover {
+      background-color: hsl(168, 100%, 20%);
+    }
+
+    .buttons {
+      display: flex;
+      flex-direction: column;
+    }
+  </style>
+
+  <style media="print">
+    body {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 11pt;
+      columns: 2;
+    }
+
+    h2 span {
+      padding: 3px 5px;
+      font-weight: normal;
+    }
+
+    h2 {
+      border-bottom: solid thin black;
+    }
+
+    .buttons {
+      display: none;
+    }
+
+    .h {
+      visibility: visible;
+      width: 100%;
+    }
+
+    .cell {
+      padding: 5px 5px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      /*      border-left: solid 1px #666;
+      border-right: solid 1px #666;*/
+      border-right: solid 1px #666;
+    }
+
+
+
+    .header {
+      padding: 10px 10px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    div.row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: stretch;
+      /*outline: 1px solid #666;*/
+      border-bottom: solid 1px #666;
+    }
+
+    .mémo>.row:nth-of-type(2) {
+      border-top: solid 1px #666;
+    }
+
+    div.headerRow {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .row>.cell:first-of-type {
+      border-left: solid 1px #666;
+    }
+
+    .mémo::after {
+      content: 'pgazaniol.fr';
+      text-align: right;
+      font-size: small;
+      text-decoration: underline;
+      text-decoration-skip-ink: auto;
+      display: block;
+    }
+
+    @page {
+      margin: 1.2cm;
+    }
+  </style>
+
+</head>
+
+<body>
+  <svg style="display: block;height:0;width:0">
+    <defs>
+      <marker id="triangle" viewBox="0 0 10 10" refX="1" refY="5" markerUnits="strokeWidth" markerWidth="5"
+        markerHeight="5" orient="auto">
+        <path d="M 0 0 L 10 5 L 0 10 z" />
+      </marker>
+    </defs>
+  </svg>
+  <div style="display:flex;">
+    <h2><span>chap. 4</span> forces</h2>
+    <div class="buttons">
+      <button title='mélanger' type="button"
+        onclick="document.querySelectorAll('.hide').forEach(function(e) {e.classList.add('h');document.getElementById('c'+e.id.substring(1)).classList.add('c');});sortTable()">
+        <svg width="2em" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.44 13.34">
+          <path fill="#FFF"
+            d="M12.29 7.77a.26.26 0 0 0-.32 0 .26.26 0 0 0 0 .32l1.76 1.73h-3.9a.58.58 0 0 1-.5-.26L8.3 8.22c-.09-.09-.19-.1-.3-.03-.08.09-.09.19-.02.3l1 1.3c.21.3.5.45.84.45h3.91l-1.76 1.73a.26.26 0 0 0 0 .32c.06.03.1.05.16.05.05 0 .1-.02.16-.05l2.1-2.1a.26.26 0 0 0 0-.32zM9.82 3.52h3.91l-1.76 1.73a.26.26 0 0 0 0 .32c.06.03.1.05.16.05.05 0 .1-.02.16-.05l2.1-2.1a.26.26 0 0 0 0-.32l-2.1-2.1a.26.26 0 0 0-.32 0 .26.26 0 0 0 0 .32l1.76 1.73h-3.9a1.1 1.1 0 0 0-.85.42L4.44 9.56a.58.58 0 0 1-.5.26H1.21c-.12.02-.2.09-.21.21.02.12.09.2.21.21h2.73a1 1 0 0 0 .84-.42l4.54-6.04a.58.58 0 0 1 .5-.26Zm-8.61 0h2.73c.21 0 .38.09.5.26l1.02 1.34a.2.2 0 0 0 .16.08c.05 0 .1-.02.13-.05.09-.09.1-.19.03-.3l-1-1.33a1.1 1.1 0 0 0-.84-.42H1.21c-.12.02-.2.09-.21.21.02.12.09.2.21.21zm0 0" />
+        </svg>
+      </button>
+      <button title="imprimer" type="button" onclick="unShuffleTable()">
+        <svg width='2em' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.44 15.44">
+          <path fill="#FFF"
+            d="M3.31 5.2c.12-.02.2-.09.21-.21V2.05c.04-.38.25-.6.63-.63h5.96a.6.6 0 0 1 .45.18l1.18 1.19a.6.6 0 0 1 .18.44V5c.02.12.09.2.21.21.12-.02.2-.09.21-.21V3.23a1 1 0 0 0-.31-.73l-1.19-1.18a1 1 0 0 0-.73-.32H4.15a.9.9 0 0 0-.73.32.95.95 0 0 0-.32.73v2.94c.02.12.09.2.21.21zm9.45.84H2.68A1.7 1.7 0 0 0 1 7.72v2.52a.82.82 0 0 0 .84.84H3.1v2.73c.04.39.25.6.63.63h7.98c.39-.03.6-.24.63-.63v-2.73h1.26a.82.82 0 0 0 .84-.84V7.72a1.7 1.7 0 0 0-1.68-1.68Zm-.84 7.77c-.02.12-.09.2-.2.21h-8c-.12-.02-.2-.09-.21-.2v-3.79c.02-.12.09-.2.21-.2h7.98c.12 0 .2.08.21.2zm2.1-3.57c-.02.26-.16.4-.42.42h-1.26v-.63c-.03-.38-.24-.6-.63-.63H3.73c-.38.04-.6.25-.63.63v.63H1.84c-.26-.02-.4-.16-.42-.42V7.72c.02-.35.14-.65.37-.9.24-.22.54-.34.89-.36h10.08c.35.02.65.14.9.37.22.24.34.54.36.89zm-1.68-2.52c-.26.02-.4.16-.42.42.02.26.16.4.42.42.26-.02.4-.16.42-.42-.02-.26-.16-.4-.42-.42zm0 0" />
+        </svg>
+      </button>
+    </div>
+  </div>
+  <div class="mémo" id="mémo">
+    <div class="headerRow">
+      <div class="header">Questions</div>
+      <div class="header">Réponses</div>
+    </div>
+    <!--FCQUESTIONS-->
+    <!--FCQUESTIONS-->
+  </div>
+
+  <script>
+
+function getUrlParameter(name) {
+  name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+  var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+  var results = regex.exec(location.search);
+  return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+}
+var questions = getUrlParameter('q').split('|');
+var tableContent = "";
+let j=0;
+while (j< questions.length){
+  tableContent+="<div class=\"row\"><div class=\"cell\">"+questions[j].split(';')[0]+"</div><div class=\"cell\"><div id=\"c"+j+"\" class=\"cache c\" onclick=\"toggle("+j+")\"><div id=\"h"+j+"\" class=\"hide h\">"+questions[j].split(';')[1]+"</div></div></div></div>";
+  j++;
+}
+document.querySelector('div.mémo').innerHTML+=tableContent;
+
+    function toggle(e) {
+      document.getElementById('h' + e).classList.toggle('h');
+      document.getElementById('c' + e).classList.toggle('c');
+    }
+
+    function hide(e) {
+      document.getElementById('h' + e).classList.add('h');
+      document.getElementById('c' + e).classList.add('c');
+    }
+
+    function sortTable() {
+      //get the parent table for convenience
+      let tableTBody = document.getElementById("mémo");
+
+      //1. get all rows
+      let rowsCollection = tableTBody.querySelectorAll(".row");
+
+      //2. convert to array
+      let rows = Array.from(rowsCollection)
+
+      //3. shuffle
+      shuffleArray(rows);
+
+      //4. add back to the DOM
+      for (const row of rows) {
+        tableTBody.appendChild(row);
+      }
+    }
+
+    function unShuffleTable() {
+      var url = window.location.href;
+      if (url.indexOf('?') > -1) {
+        url += '&print=1'
+      } else {
+        url += '?print=1'
+      }
+      window.location.href = url;
+    }
+    /**
+     * Randomize array element order in-place.
+     * Using Durstenfeld shuffle algorithm.
+     * from: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array/12646864#12646864
+     */
+    function shuffleArray(array) {
+      for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+      }
+    }
+
+    function reloadForPrint() {
+      var print = getUrlParameter('print');
+      if (print == 1) {
+        print = 0;
+        window.print();
+        let url = new URL(window.location.href);
+        let params = new URLSearchParams(url.search);
+        url.searchParams.delete('print');
+        window.location.href = url;
+      } else {
+        sortTable();
+      }
+    }
+
+    filterQuestion()
+    reloadForPrint()
+  </script>
+</body>
+
+</html>
