@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>Mémo builder</title>
+        <link rel="stylesheet" href="https://unpkg.com/mvp.css"> 
+	</head>
+	<body>
+        <form>
+            <textarea id="data" placeholder="séparer les questions des réponses par un ';' et changer de ligne à chaque question.">
+            </textarea>
+            <button onclick="valider()">Valider</button>
+        </form>
+        <script>
+            function valider(){
+                var param=document.getElementById('data').value.replace(/(?:\r|\n|\r\n)/g, '|');
+                console.log(param);
+            }
+        </script>
+	</body>
+</html>
