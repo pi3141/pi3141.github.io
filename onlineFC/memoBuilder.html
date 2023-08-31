@@ -10,12 +10,17 @@
             <textarea id="data" placeholder="séparer les questions des réponses par un ';' et changer de ligne à chaque question.">
             </textarea>
             <button onclick="valider()">Valider</button>
+	    <div id="lien"></div><button onclick="copy()">copier le lien</button>button>
         </form>
         <script>
             function valider(){
                 var param=document.getElementById('data').value.replace(/(?:\r|\n|\r\n)/g, '|');
-                console.log(param);
+                document.getElementById('lien').innerHTML="memo.html?q="+param;
             }
+	    function copy(){
+		navigator.clipboard.writeText(param);
+		document.getElementById('lien').textContent="copié";
+	    }
         </script>
 	</body>
 </html>
