@@ -11,11 +11,12 @@
 	<body>
             <textarea id="data" placeholder="séparer les questions des réponses par un ';' et changer de ligne à chaque question."></textarea>
             <button onclick="valider()">Valider</button>
-	    <div id="lien"></div><button onclick="copy()" title="copier le lien dans le presse-papier">📋</button>
+	    <div id="lien"></div><button disabled id='copy' onclick="copy()" title="copier le lien dans le presse-papier">📋</button>
         <script>
             function valider(){
                 var param=document.getElementById('data').value.replace(/(?:\r|\n|\r\n)/g, '|');
                 document.getElementById('lien').innerHTML="memo.html?q="+param;
+		document.getElementById('copy').disabled = false;
             }
 	    function copy(){
 		navigator.clipboard.writeText(param);
