@@ -214,7 +214,7 @@
     </defs>
   </svg>
   <div style="display:flex;">
-    <h2><span>chap. 4</span> forces</h2>
+    <h2><span>chap. <span id="chapNr"></span></span> <span id="chapTitle"></span></h2>
     <div class="buttons">
       <button title='mélanger' type="button"
         onclick="document.querySelectorAll('.hide').forEach(function(e) {e.classList.add('h');document.getElementById('c'+e.id.substring(1)).classList.add('c');});sortTable()">
@@ -248,6 +248,8 @@ function getUrlParameter(name) {
   var results = regex.exec(location.search);
   return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
 }
+document.getElementById('chapNr').textContent=getUrlParameter('n');
+document.getElementById('chapTitle').textContent=getUrlParameter('n');
 var questions = getUrlParameter('q').split('|');
 var tableContent = "";
 let j=0;
