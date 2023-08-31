@@ -249,7 +249,7 @@ function getUrlParameter(name) {
   return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
 }
 document.getElementById('chapNr').textContent=getUrlParameter('n');
-document.getElementById('chapTitle').textContent=getUrlParameter('n');
+document.getElementById('chapTitle').textContent=getUrlParameter('t');
 var questions = getUrlParameter('q').split('|');
 var tableContent = "";
 let j=0;
