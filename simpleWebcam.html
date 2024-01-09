@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>Simple Webcam Viewer</title>
+        <style>
+            body{height: 100vh;background: black;padding:0;margin:0;font-family: 'open sans', 'source sans pro', sans;}
+            #webcamStream{height: 100%;display: flex;justify-content: center;width:100%;overflow:clip;}
+            .flipV{transform: rotateX(180deg);}
+            .flipH{transform: rotateY(180deg);}
+            .rotate90{transform: rotate(90deg);}
+            .rotate180{transform: rotate(180deg);}
+            .rotate270{transform: rotate(270deg);}
+            #shortcutMap{position: absolute;bottom: 0;right: 0;transition: all .3s;opacity:0;padding:10px;line-height: 2;color:#ddd;background-color:#0005;}
+            #shortcutToggle{background: #fffa;position: absolute;bottom: 0;right: 0;transition: all .3s;padding:10px;font-size:large;border-radius: 10px 0px 0px 0px;font-family: 'sans';font-weight: bold;opacity:.3;z-index:1;}
+            #shortcutToggle:hover{opacity: 0;}
+            .hide-cursor{cursor: none;}
+            #shortcutToggle:hover ~ #shortcutMap{opacity: 1;}
+            ul{list-style-type: none;padding:0;margin:0;}
+            .crop{object-fit: cover;}
+            .stretch{object-fit: fill;}
+            /*kbd {margin: 0px 0.1em;padding: 0.1em 0.6em;border-radius: 3px;border: 1px solid rgb(204, 204, 204);color: rgb(51, 51, 51);line-height: 1.4;font-family: Arial,Helvetica,sans-serif;font-size: 10px;display: inline-block;box-shadow: 0px 1px 0px rgba(0,0,0,0.2), inset 0px 0px 0px 2px #ffffff;background-color: rgb(247, 247, 247);box-shadow: 0 1px 0px rgba(0, 0, 0, 0.2), 0 0 0 2px #ffffff inset;border-radius: 3px;text-shadow: 0 1px 0 #fff;}*/
+            kbd {border-radius: 0.25rem;border: 1px solid #999;font-family: sans;padding: 2px 5px;box-shadow: 0 1px 0 0.5px #999;}
+        </style>
+	</head>
+	<body onLoad="document.body.focus()";>
+        <div id="shortcutToggle">?</div>
+        <div id="shortcutMap">
+            <ul>
+                <li><kbd>space</kbd> : play / pause</li>
+                <li><kbd>f</kbd> : fullscreen</li>
+                <li><kbd>↑</kbd> | <kbd>↓</kbd> : vertical flip</li>
+                <li><kbd>→</kbd> : rotation (+90deg)</li>
+                <li><kbd>←</kbd> : horizontal flip</li>
+                <li><kbd>s</kbd> : stretch</li>
+                <li><kbd>c</kbd> : crop</li>
+            </ul>
+        </div>
+        <div id="webcamStream"></div>
+        <script>
+            document.addEventListener('keydown', function (event){event.preventDefault();if (event.code == 'Space'){if (video.paused){video.play();}else{video.pause();}}});
+            document.addEventListener('keydown', function (event){event.preventDefault();if (event.code == 'ArrowUp' || event.code == 'ArrowDown'){
+            if (video.classList.contains('flipV')){
+            video.classList.remove('flipV');
+            }else{
+            video.classList.add('flipV');
+            }}});
+            document.addEventListener('keydown', function (event){event.preventDefault();if (event.code == 'ArrowLeft'){
+            if (video.classList.contains('flipH')){
+              video.classList.remove('flipH');
+            }else{
+              video.classList.add('flipH');
+            }
+            }});
+            document.addEventListener('keydown', function (event){event.preventDefault();if (event.code == 'ArrowRight'){
+              if (video.classList.contains('rotate270')){
+              video.classList.remove('rotate270');
+              }else{
+                if (video.classList.contains('rotate180')){
+                  video.classList.remove('rotate180');
+                  video.classList.add('rotate270');
+                }else{
+                  if (video.classList.contains('rotate90')){
+                    video.classList.remove('rotate90');
+                    video.classList.add('rotate180');
+                  }else{
+                    video.classList.add('rotate90');                  
+                  }
+                }
+              }
+            }});
+            
+            var video = document.createElement('video');
+            video.autoplay = true;
+            video.id = 'webcamStream';
+            document.addEventListener('keydown', function (event){event.preventDefault();if (event.key == 'f'){if(document.body.classList.contains('fs')){document.body.classList.remove('fs');document.exitFullscreen();}else{document.body.classList.add('fs');video.requestFullscreen();}}});
+            document.addEventListener('keydown', function (event){event.preventDefault();if (event.key == 's'){if(video.classList.contains('stretch')){video.classList.remove('stretch');}else{(video.classList.contains('crop'));{video.classList.remove('crop');}video.classList.add('stretch');}}});
+            document.addEventListener('keydown', function (event){event.preventDefault();if (event.key == 'c'){if(video.classList.contains('crop')){video.classList.remove('crop');}else{if(video.classList.contains('stretch')){video.classList.remove('stretch');}video.classList.add('crop');}}});
+            var cmdDiv = document.createElement('div');
+            cmdDiv.setAttribute('style', 'margin-left:-30px;display:flex;flex:0 0 30px;flex-flow: column nowrap;align-items:flex-end;justify-content:space-between;padding:0px;');
+            //video.requestFullscreen();
+            video.addEventListener("mousemove", e => {
+            // clear the timer if it is set when the mouse move
+            const timer = video.getAttribute("timer");
+            if (timer) {
+                clearTimeout(timer);
+                video.setAttribute("timer", "");
+            }
+            // set timeout to wait of idle time
+            const t = setTimeout(() => {
+                video.setAttribute("timer", "");
+                video.classList.add("hide-cursor");
+            }, 500);
+            video.setAttribute("timer", t);
+            video.classList.remove("hide-cursor");
+            });
+            document.getElementById('webcamStream').append(video);
+            if (navigator.mediaDevices.getUserMedia) {
+                navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function (stream) {
+                    video.srcObject = stream;
+                })
+                .catch(function (err0r) {
+                    console.log("Something went wrong!");
+                });
+            }
+        </script>
+	</body>
+</html>
