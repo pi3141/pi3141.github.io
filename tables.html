@@ -374,6 +374,8 @@
       });
     });
     document.querySelector("#home").addEventListener("click", () => {
+      //reset localstorage
+      localStorage.removeItem("areviser")
       window.location.href = window.location.href;
     });
 
