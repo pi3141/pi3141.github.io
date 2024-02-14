@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<!--TODO:
-1) bug input range on reload
+<!--
+version 0.2
 -->
 <html lang="fr">
 
@@ -421,15 +421,15 @@
           break;
         case "2":
           value.textContent = "Normal";
-          value.dataset.time = "2000";
+          value.dataset.time = "2500";
           break;
         case "3":
           value.textContent = "Flash McQueen";
-          value.dataset.time = "1500";
+          value.dataset.time = "2000";
           break;
         case "4":
           value.textContent = "Lucky Luke";
-          value.dataset.time = "1000";
+          value.dataset.time = "1500";
           break;
       }
     }
@@ -648,7 +648,7 @@
         var theDate = currentTime.getDate() + '/' + (currentTime.getMonth() + 1) + '/' + currentTime.getFullYear()
         a.push(score + '|' + theDate);
         console.log({ a });
-        a.sort((el) => { Number(el.split('|')[0]); })
+        a.sort(function(el1,el2) { return parseInt(el1.split('|')[0]) - parseInt(el2.split('|')[0]) ; })
         a.reverse();
         a = a.slice(0, 8);
         // Re-serialize the array back into a string and store it in localStorage
