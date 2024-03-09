@@ -41,7 +41,7 @@
 </head>
 
 <body>
-    <label>Masse après cuisson (g) <input type="text" id='masse_pf'></input></label>
+    <label>Si cuisson, indiquer la masse après cuisson (g) <input placeholder="facultatif" type="text" id='masse_pf'></input></label>
     <br>
     <fieldset id="ingredients">
         <legend>Ingrédients (masse en g sauf si précisé)</legend>
@@ -103,6 +103,13 @@
             };
             var items = ['energy', 'fibers', 'fruits_vegetables_percentage', 'proteins', 'saturated_fats', 'salt', 'sugar'];
             var masse_pf = document.querySelector('#masse_pf').value;
+            if (masse_pf == ""){
+                masse_pf = 0;
+                document.querySelectorAll('.masse_ingredient').forEach(function (el){
+                    masse_pf = masse_pf + el.value;
+                });
+                console.log({masse_pf});
+            }
             var f_and_v_mass = 0;
             for (const item of items) {
                 document.querySelectorAll("input.masse_ingredient").forEach((el) => {
