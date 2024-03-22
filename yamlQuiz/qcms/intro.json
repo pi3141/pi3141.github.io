@@ -1,0 +1,50 @@
+{
+    "title": "Questions de physique",
+    "questions": [
+        {
+            "answerType": "choices",
+            "statement": "Qui a découvert la théorie de la relativité restreinte ?",
+            "illustration": null,
+            "choices": [
+                "Albert Einstein",
+                "Einsestein",
+                "Barack Obama"
+            ],
+            "tip": "C'était en 1915."
+        },
+        {
+            "answerType": "multiChoices",
+            "statement": "Qui a été deux fois prix Nobel?",
+            "illustration": null,
+            "correctChoices": [
+                "Marie Curie",
+                "John Bardeen"
+            ],
+            "otherChoices": [
+                "Didier Raoult",
+                "René Coty",
+                "Ronald Mc Donald"
+            ],
+            "tip": "Il faut réfléchir."
+        },
+        {
+            "answerType": "numericalValue",
+            "statement": "En quelle année Isaac Newton publia les principia ?",
+            "illustration": null,
+            "answer": 1687,
+            "tip": "C'est la première édition."
+        },
+        {
+            "answerType": "textEntry",
+            "statement": "Quelle est le nom de la force qui vous maintient au sol ?",
+            "illustration": null,
+            "answer": [
+                "le poids",
+                "poids",
+                "la force de pesanteur"
+            ],
+            "case-sensitive": false,
+            "tip": "Ne pas confondre avec la masse qui est la quantité de matière d'un objet."
+        }
+    ]
+}
